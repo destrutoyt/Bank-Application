@@ -2,27 +2,29 @@
 
 class CreateAccount //MUST FINISH BEFORE CONTINUING WITH ANOTHER CLASS
 {
-    string username;
-    string password;
-    string customer_name;
-    int customerID; //MUST BE RANDOM
+    int[] storeC_Id = { }; //STORES ID
+    string[] storeUser = {"hi"}; //STORES USER
+    string[] storePassword = { }; //STORES PASSWORD
+    string[] storeCustomer = { }; //STORES CUSTOMER
 
-    public CreateAccount(string username, string password, string customer_name, int customer_id) //CONSTRUCTOR
+    public CreateAccount(int[] storeC_Id, string[] storeUser, string[] storePassword, string[] storeCustomer) //CONSTRUCTOR
     {
-        this.username = username;
-        this.password = password;
-        this.customer_name = customer_name;
-        this.customerID = customer_id;
+        this.storeC_Id = storeC_Id;
+        this.storeUser = storeUser;
+        this.storePassword = storePassword;
+        this.storeCustomer = storeCustomer;
     }
     public void Details() //MUST BE DEVELOP
     {
         WriteLine("= = = = = = = = = = = = =");
         Console.WriteLine("PROFILE DETAILS");
-        Console.WriteLine($"User: {username}");
-        Console.WriteLine($"Name: {customer_name}");
-        Console.WriteLine($"ID: {customerID}");
+        Console.WriteLine($"User: {storeUser[0]}");
+        Console.WriteLine($"Name: {storeCustomer[0]}");
+        Console.WriteLine($"ID: {storeC_Id[0]}");
         WriteLine("= = = = = = = = = = = = =");
     }
+    public string[] StoreUser { get;}
+    public string[] StorePassword { get;}
 }
 
 class BankAccount
@@ -35,6 +37,13 @@ class RunProgram
 {
     static void Main(string[] args)
     {
+        string user = "none";
+        string pass = "none";
+        string passRule = "~!@#$%^&*()_+=-`/*-+/?.>,<';][}{:"; ///NOT ALLOWED
+        string name = "none";
+        string log_user = "none";
+        string log_pass = "none";
+
         bool goBack = false;
         while (true) //GOES BACK TO MENU IF TRUE
         {
@@ -52,11 +61,6 @@ class RunProgram
             switch (selection)
             {
                 case 1: //REGISTRATION
-                    string user;
-                    string pass;
-                    string passRule = "~!@#$%^&*()_+=-`/*-+/?.>,<';][}{:"; ///NOT ALLOWED
-                    string name;
-
                     WriteLine("So we have a new member on our ship?!");
                     WriteLine("However, to join us, you must finish a required registration!");
                     WriteLine("Your security is our TOP PRIORITY, but you need to help us out!");
@@ -71,7 +75,7 @@ class RunProgram
                     WriteLine("Your password is important to keep you safe, so we decided to add some requirements for your safety");
 
                     WriteLine("REQUIREMENTS:\n1. Must be at least 5 characters long\n2. Cannot be your username\n" +
-                        "Now, I will let your create your password!");
+                        "Now, I will let your create your password!\n");
 
                     Write("Create your password (CASE SENSITIVE): ");
                     pass = Convert.ToString(ReadLine());
@@ -82,9 +86,9 @@ class RunProgram
                         Write("Try again, create a password: ");
                         pass = Convert.ToString(ReadLine());
                     }
-                    WriteLine("Great password! Please do not forget it!");
+                    WriteLine("Great password! Please do not forget it!\n");
                     WriteLine("\nNow, we need your full name or at least your first name for legal purposes");
-                    WriteLine("Don't worry about capitalization! Our system will do it for you!\nHowever, your name must not contain numbers or special characters!");
+                    WriteLine("Don't worry about capitalization! Our system will do it for you!\nHowever, your name must not contain numbers or special characters!\n");
                     Write("Insert your Full Name or First Name: ");
                     name = Convert.ToString(ReadLine());
 
@@ -101,20 +105,38 @@ class RunProgram
 
                     Random random = new Random();
                     int customerid = random.Next(9999999); //Creates a random number for customer ID
-                    CreateAccount Profile = new CreateAccount(user, pass, name, customerid); //Calls constructor
+                    CreateAccount Profile = new CreateAccount(new int[] { customerid }, new string[] {user}, new string[] { pass }, new string[] { name }); //Calls constructor
+                    
 
                     Clear();
                     Profile.Details(); //Calls Details Class
-
+                    
                     WriteLine("\n");
                     WriteLine($"Welcome To The Ship Mr/Ms {name}!");
                     WriteLine("You can now log-in into your bank account and guess what! We just gave you $200!");
-                    Clear();
+      
                     goBack = true;
                     break;
 
                 case 2:
-                    WriteLine("Test 2");
+                    WriteLine("LOG-IN\n");
+                    Write("Username: ");
+                    log_user = ReadLine();
+                    Write("Password: ");
+                    log_pass = Convert.ToString(ReadLine());
+                    WriteLine("\n");
+
+                    while (log_user != user || log_pass != pass)
+                    {
+                        WriteLine("You inserted the wrong username or password");
+                        Write("Username: ");
+                        log_user = ReadLine();
+                        Write("Password: ");
+                        log_pass = Convert.ToString(ReadLine());
+                        WriteLine("\n");
+                    }
+
+                    WriteLine("PASSED");
                     break;
                 case 3:
                     WriteLine("Test 3");
