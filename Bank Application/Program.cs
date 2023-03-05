@@ -1,18 +1,22 @@
 ﻿using static System.Console;
 
-class CreateAccount //MUST FINISH BEFORE CONTINUING WITH ANOTHER CLASS
+class CreateAccount //MUST FINISH BEFORE CONTINUING WITH ANOTHER CLASS (PARTIAL COMPLETION)
 {
     int[] storeC_Id = { }; //STORES ID
-    string[] storeUser = {"hi"}; //STORES USER
+    string[] storeUser = {}; //STORES USER
     string[] storePassword = { }; //STORES PASSWORD
     string[] storeCustomer = { }; //STORES CUSTOMER
+    double balance;
+    int account_number;
 
-    public CreateAccount(int[] storeC_Id, string[] storeUser, string[] storePassword, string[] storeCustomer) //CONSTRUCTOR
+    public CreateAccount(int[] storeC_Id, string[] storeUser, string[] storePassword, string[] storeCustomer, double balance, int account_number) //CONSTRUCTOR
     {
         this.storeC_Id = storeC_Id;
         this.storeUser = storeUser;
         this.storePassword = storePassword;
         this.storeCustomer = storeCustomer;
+        this.balance = balance;
+        this.account_number = account_number;
     }
     public void Details() //MUST BE DEVELOP
     {
@@ -20,19 +24,36 @@ class CreateAccount //MUST FINISH BEFORE CONTINUING WITH ANOTHER CLASS
         Console.WriteLine("PROFILE DETAILS");
         Console.WriteLine($"User: {storeUser[0]}");
         Console.WriteLine($"Name: {storeCustomer[0]}");
-        Console.WriteLine($"ID: {storeC_Id[0]}");
+        Console.WriteLine($"User ID: {storeC_Id[0]}");
+        Console.WriteLine($"Account Number: {account_number}");
         WriteLine("= = = = = = = = = = = = =");
     }
     public string[] StoreUser { get;}
     public string[] StorePassword { get;}
+    public string[] StoreCustomer { get;}
+    public double Balance
+    {
+        get { return balance; }
+        set { balance = value; }
+    }
+    public int AccountNumber { get;}
 }
 
-class BankAccount
+class Job
 {
+    public double salary = 150.0;
     double balance;
-    int account_number;
-}
 
+    public Job(double balance)
+    {
+        this.balance = balance;
+    }
+
+    public void PayCheck()
+    {
+     WriteLine(salary + balance);
+    }
+}
 class RunProgram
 {
     static void Main(string[] args)
@@ -43,8 +64,9 @@ class RunProgram
         string name = "none";
         string log_user = "none";
         string log_pass = "none";
-
+        double balance = 0;
         bool goBack = false;
+
         while (true) //GOES BACK TO MENU IF TRUE
         {
             WriteLine("Welcome to your Online Bank");
@@ -105,8 +127,10 @@ class RunProgram
 
                     Random random = new Random();
                     int customerid = random.Next(9999999); //Creates a random number for customer ID
-                    CreateAccount Profile = new CreateAccount(new int[] { customerid }, new string[] {user}, new string[] { pass }, new string[] { name }); //Calls constructor
-                    
+                    int bank_account = random.Next(99999); //Creates a random number for customer ID
+                    balance = 200;
+                    CreateAccount Profile = new CreateAccount(new int[] { customerid }, new string[] {user}, new string[] { pass }, new string[] { name }, balance, bank_account); //Calls constructor
+                    Profile.Balance = balance;
 
                     Clear();
                     Profile.Details(); //Calls Details Class
@@ -114,7 +138,6 @@ class RunProgram
                     WriteLine("\n");
                     WriteLine($"Welcome To The Ship Mr/Ms {name}!");
                     WriteLine("You can now log-in into your bank account and guess what! We just gave you $200!");
-      
                     goBack = true;
                     break;
 
@@ -135,8 +158,22 @@ class RunProgram
                         log_pass = Convert.ToString(ReadLine());
                         WriteLine("\n");
                     }
-
-                    WriteLine("PASSED");
+                    WriteLine("Welcome Back {0}", name);
+                    WriteLine($"Bank Account                    Balance: ${balance}");
+                    WriteLine("MENU");
+                    WriteLine("1. Work");
+                    Write("Yes? ");
+                    string input = Console.ReadLine();
+                    if (input == "yes")
+                    {
+                        Job paycheck = new Job(balance);
+                        
+                        WriteLine($"You were paid ${paycheck.salary} and your new balance is ${paycheck.PayCheck}");
+                    }
+                    else
+                    {
+                        WriteLine("FAILED");
+                    }
                     break;
                 case 3:
                     WriteLine("Test 3");
