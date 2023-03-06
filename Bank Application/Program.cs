@@ -1,59 +1,6 @@
-﻿using static System.Console;
+﻿using Bank_Application;
+using static System.Console;
 
-class CreateAccount //MUST FINISH BEFORE CONTINUING WITH ANOTHER CLASS (PARTIAL COMPLETION)
-{
-    int[] storeC_Id = { }; //STORES ID
-    string[] storeUser = {}; //STORES USER
-    string[] storePassword = { }; //STORES PASSWORD
-    string[] storeCustomer = { }; //STORES CUSTOMER
-    double balance;
-    int account_number;
-
-    public CreateAccount(int[] storeC_Id, string[] storeUser, string[] storePassword, string[] storeCustomer, double balance, int account_number) //CONSTRUCTOR
-    {
-        this.storeC_Id = storeC_Id;
-        this.storeUser = storeUser;
-        this.storePassword = storePassword;
-        this.storeCustomer = storeCustomer;
-        this.balance = balance;
-        this.account_number = account_number;
-    }
-    public void Details() //MUST BE DEVELOP
-    {
-        WriteLine("= = = = = = = = = = = = =");
-        Console.WriteLine("PROFILE DETAILS");
-        Console.WriteLine($"User: {storeUser[0]}");
-        Console.WriteLine($"Name: {storeCustomer[0]}");
-        Console.WriteLine($"User ID: {storeC_Id[0]}");
-        Console.WriteLine($"Account Number: {account_number}");
-        WriteLine("= = = = = = = = = = = = =");
-    }
-    public string[] StoreUser { get;}
-    public string[] StorePassword { get;}
-    public string[] StoreCustomer { get;}
-    public double Balance
-    {
-        get { return balance; }
-        set { balance = value; }
-    }
-    public int AccountNumber { get;}
-}
-
-class Job
-{
-    public double salary = 150.0;
-    double balance;
-
-    public Job(double balance)
-    {
-        this.balance = balance;
-    }
-
-    public void PayCheck()
-    {
-     WriteLine(salary + balance);
-    }
-}
 class RunProgram
 {
     static void Main(string[] args)
@@ -127,7 +74,7 @@ class RunProgram
 
                     Random random = new Random();
                     int customerid = random.Next(9999999); //Creates a random number for customer ID
-                    int bank_account = random.Next(99999); //Creates a random number for customer ID
+                    int bank_account = random.Next(99999); //Creates a random number for account number
                     balance = 200;
                     CreateAccount Profile = new CreateAccount(new int[] { customerid }, new string[] {user}, new string[] { pass }, new string[] { name }, balance, bank_account); //Calls constructor
                     Profile.Balance = balance;
@@ -151,7 +98,7 @@ class RunProgram
 
                     while (log_user != user || log_pass != pass)
                     {
-                        WriteLine("You inserted the wrong username or password");
+                        WriteLine("It looks like either you are not registered or you inserted the wrong username/password");
                         Write("Username: ");
                         log_user = ReadLine();
                         Write("Password: ");
@@ -167,12 +114,11 @@ class RunProgram
                     if (input == "yes")
                     {
                         Job paycheck = new Job(balance);
-                        
-                        WriteLine($"You were paid ${paycheck.salary} and your new balance is ${paycheck.PayCheck}");
+                        WriteLine($"You were paid ${paycheck.salary} and your new balance is ${paycheck.PayCheck}"); //WORKING FINE, BUT SECOND PARAMETER BAD
                     }
                     else
                     {
-                        WriteLine("FAILED");
+                        WriteLine("IF CONDITION FAILED!");
                     }
                     break;
                 case 3:
