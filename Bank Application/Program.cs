@@ -1,8 +1,11 @@
 ﻿using Bank_Application;
+using System.Security.Principal;
 using static System.Console;
 
 class RunProgram
 {
+    static List<CreateAccount> accounts = new List<CreateAccount>();
+
     static void Main(string[] args)
     {
         string user = "none";
@@ -78,6 +81,8 @@ class RunProgram
                     balance = 200;
                     CreateAccount Profile = new CreateAccount(new int[] { customerid }, new string[] {user}, new string[] { pass }, new string[] { name }, balance, bank_account); //Calls constructor
                     Profile.Balance = balance;
+                    accounts.Add(Profile);
+                    WriteLine(accounts.ToString());
 
                     Clear();
                     Profile.Details(); //Calls Details Class
@@ -114,7 +119,7 @@ class RunProgram
                     if (input == "yes")
                     {
                         Job paycheck = new Job(balance);
-                        WriteLine($"You were paid ${paycheck.salary} and your new balance is ${paycheck.PayCheck}"); //WORKING FINE, BUT SECOND PARAMETER BAD
+                        WriteLine($"You were paid ${paycheck.salary} and your new balance is $" + paycheck.PayCheck()); //ERROR FIXED 3/6/2023
                     }
                     else
                     {

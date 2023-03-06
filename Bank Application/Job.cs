@@ -9,7 +9,7 @@ namespace Bank_Application
     public class Job
     {
         public double salary = 150.0;
-        double balance;
+        double balance = 0;
 
         public Job(double balance)
         {
@@ -18,7 +18,7 @@ namespace Bank_Application
 
         public double PayCheck()
         {
-            return salary + balance; //MUST FIX
+            return salary + balance; //FIXED
         }
     }
 }
