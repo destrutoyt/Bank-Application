@@ -79,11 +79,9 @@ class RunProgram
                     WriteLine("\n");
 
                     Random random = new Random();
-                    int customerid = random.Next(9999999); //Creates a random number for customer ID
                     int bank_account = random.Next(99999); //Creates a random number for account number
                     balance = 200;
-                    CreateAccount Profile = new CreateAccount(new int[] { customerid }, new string[] { user }, new string[] { pass }, new string[] { name }, balance, bank_account); //Calls constructor
-                    Profile.Balance = balance;
+                    CreateAccount Profile = new CreateAccount(user, pass, name, balance, bank_account); //Calls constructor
                     accounts.Add(Profile);
                     WriteLine(accounts.ToString());
 
@@ -126,7 +124,7 @@ class RunProgram
                         switch (selection)
                         {
                             case 1:
-                                Test(Profile.Balance);
+                                Payment();
                                 goBack2 = true;
                                 break;
 
@@ -140,12 +138,14 @@ class RunProgram
                     break;
             }
         }
-    static void Test(double balance)
         {
-            Job paycheck = new Job(balance);
+        static void Payment()
+        { 
+            //TEST
             WriteLine("You worked really hard this week!");
             WriteLine("Keep up the amazing job and you might get a raise!");
-            WriteLine($"You were paid ${paycheck.salary} and your new balance is $" + paycheck.PayCheck()); //ERROR FIXED 3/6/2023
+            WriteLine($"You were paid ${paycheck.deposit} and your new balance is $" + paycheck.balance()); //ERROR FIXED 3/6/2023
         }
+        } 
     }
 }

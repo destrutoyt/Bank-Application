@@ -6,19 +6,15 @@ using System.Threading.Tasks;
 
 namespace Bank_Application
 {
-    public class Job
+    public class Job : CreateAccount
     {
         public double salary = 150.0;
-        double balance;
 
-        public Job(double balance)
-        {
-            this.balance = +balance;
-        }
+        public Job(string user, string password, string name, double balance, int account_number) : base(user, password, name, balance, account_number) { }
 
-        public double PayCheck()
+        public void PayCheck(double salary)
         {
-            return salary + balance; //FIXED
+           balance =+ salary; //FIXED
         }
     }
 }
