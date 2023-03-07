@@ -2,6 +2,7 @@
 using System.Security.Principal;
 using static System.Console;
 
+
 class RunProgram
 {
     static List<CreateAccount> accounts = new List<CreateAccount>();
@@ -16,6 +17,8 @@ class RunProgram
         string log_pass = "none";
         double balance = 0;
         bool goBack = false;
+        bool goBack2 = false;
+        int selection1;
 
         while (true) //GOES BACK TO MENU IF TRUE
         {
@@ -79,14 +82,14 @@ class RunProgram
                     int customerid = random.Next(9999999); //Creates a random number for customer ID
                     int bank_account = random.Next(99999); //Creates a random number for account number
                     balance = 200;
-                    CreateAccount Profile = new CreateAccount(new int[] { customerid }, new string[] {user}, new string[] { pass }, new string[] { name }, balance, bank_account); //Calls constructor
+                    CreateAccount Profile = new CreateAccount(new int[] { customerid }, new string[] { user }, new string[] { pass }, new string[] { name }, balance, bank_account); //Calls constructor
                     Profile.Balance = balance;
                     accounts.Add(Profile);
                     WriteLine(accounts.ToString());
 
                     Clear();
                     Profile.Details(); //Calls Details Class
-                    
+
                     WriteLine("\n");
                     WriteLine($"Welcome To The Ship Mr/Ms {name}!");
                     WriteLine("You can now log-in into your bank account and guess what! We just gave you $200!");
@@ -110,29 +113,39 @@ class RunProgram
                         log_pass = Convert.ToString(ReadLine());
                         WriteLine("\n");
                     }
-                    WriteLine("Welcome Back {0}", name);
-                    WriteLine($"Bank Account                    Balance: ${balance}");
-                    WriteLine("MENU");
-                    WriteLine("1. Work");
-                    Write("Yes? ");
-                    string input = Console.ReadLine();
-                    if (input == "yes")
+
+                    while (true)
                     {
-                        Job paycheck = new Job(balance);
-                        WriteLine($"You were paid ${paycheck.salary} and your new balance is $" + paycheck.PayCheck()); //ERROR FIXED 3/6/2023
+                        WriteLine("Welcome Back {0}", name);
+                        WriteLine($"Bank Account                   Wallet: NOT AVAILABLE YET Balance: ${balance}");
+                        WriteLine("MENU");
+                        WriteLine("1. Deposit");
+                        Write("Selection (MUST BE A NUMBER): ");
+                        selection = Convert.ToInt32(ReadLine());
+
+                        switch (selection)
+                        {
+                            case 1:
+                                Test(Profile.Balance);
+                                goBack2 = true;
+                                break;
+
+                            case 2:
+                                Test(balance);
+                                break;
+                        }
+
                     }
-                    else
-                    {
-                        WriteLine("IF CONDITION FAILED!");
-                    }
-                    break;
-                case 3:
-                    WriteLine("Test 3");
-                    break;
                 default:
-                    WriteLine("Exiting Program");
                     break;
             }
+        }
+    static void Test(double balance)
+        {
+            Job paycheck = new Job(balance);
+            WriteLine("You worked really hard this week!");
+            WriteLine("Keep up the amazing job and you might get a raise!");
+            WriteLine($"You were paid ${paycheck.salary} and your new balance is $" + paycheck.PayCheck()); //ERROR FIXED 3/6/2023
         }
     }
 }

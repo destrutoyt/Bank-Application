@@ -9,11 +9,11 @@ namespace Bank_Application
     public class Job
     {
         public double salary = 150.0;
-        double balance = 0;
+        double balance;
 
         public Job(double balance)
         {
-            this.balance = balance;
+            this.balance = +balance;
         }
 
         public double PayCheck()

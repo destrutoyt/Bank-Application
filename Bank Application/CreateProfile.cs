@@ -10,19 +10,17 @@ namespace Bank_Application
 {
     public class CreateAccount //MUST FINISH BEFORE CONTINUING WITH ANOTHER CLASS (PARTIAL COMPLETION)
     {
-        int[] storeC_Id = { }; //STORES ID
-        string[] storeUser = { }; //STORES USER
-        string[] storePassword = { }; //STORES PASSWORD
-        string[] storeCustomer = { }; //STORES CUSTOMER
-        double balance;
-        int account_number;
+        public string user;
+        public string password;
+        public string name;
+        public double balance;
+        public int account_number;
 
-        public CreateAccount(int[] storeC_Id, string[] storeUser, string[] storePassword, string[] storeCustomer, double balance, int account_number) //CONSTRUCTOR
+        public CreateAccount(string user, string password, string name, double balance, int account_number) //CONSTRUCTOR
         {
-            this.storeC_Id = storeC_Id;
-            this.storeUser = storeUser;
-            this.storePassword = storePassword;
-            this.storeCustomer = storeCustomer;
+            this.user = user;
+            this.password = password;
+            this.name = name;
             this.balance = balance;
             this.account_number = account_number;
         }
@@ -30,20 +28,14 @@ namespace Bank_Application
         {
             WriteLine("= = = = = = = = = = = = =");
             Console.WriteLine("PROFILE DETAILS");
-            Console.WriteLine($"User: {storeUser[0]}");
-            Console.WriteLine($"Name: {storeCustomer[0]}");
-            Console.WriteLine($"User ID: {storeC_Id[0]}");
+            Console.WriteLine($"User: {user}");
+            Console.WriteLine($"Name: {name}");
             Console.WriteLine($"Account Number: {account_number}");
             WriteLine("= = = = = = = = = = = = =");
         }
-        public string[] StoreUser { get; }
-        public string[] StorePassword { get; }
-        public string[] StoreCustomer { get; }
-        public double Balance
+        public void deposit(double amount)
         {
-            get { return balance; }
-            set { balance = value; }
+            balance += amount;
         }
-        public int AccountNumber { get; }
     }
 }
