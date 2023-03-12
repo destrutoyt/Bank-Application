@@ -6,15 +6,25 @@ using System.Threading.Tasks;
 
 namespace Bank_Application
 {
-    public class Job : CreateAccount
+    public class Job
     {
-        public double salary = 150.0;
+        public decimal PayH { get; private set; }
+        public int Hours { get; private set; }
+        public decimal PayT { get; set; }
 
-        public Job(string user, string password, string name, double balance, int account_number) : base(user, password, name, balance, account_number) { }
-
-        public void PayCheck(double salary)
+        public Job(decimal payH, int hours)
         {
-           balance =+ salary; //FIXED
+            PayH = payH;
+            Hours = hours;
+        }
+
+        public void DisplayPayment()
+        {
+            PayT = PayH * Hours;
+            Console.WriteLine($"Pay Per Hour {PayH:C}!");
+            Console.WriteLine($"Hours Worked {Hours:C}!");
+            Console.WriteLine($"Total Pay: {PayT:C}!");
         }
     }
 }
+

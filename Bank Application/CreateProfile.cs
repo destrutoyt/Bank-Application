@@ -10,10 +10,10 @@ namespace Bank_Application
 {
     public class CreateAccount //MUST FINISH BEFORE CONTINUING WITH ANOTHER CLASS (PARTIAL COMPLETION)
     {
-        public string user;
-        public string password;
-        public string name;
-        public int account_number;
+        public string user = "";
+        public string password = "";
+        public string name = "";
+        public int account_number = 0;
 
         public CreateAccount(string user, string password, string name, int account_number) //CONSTRUCTOR
         {
@@ -30,6 +30,12 @@ namespace Bank_Application
             Console.WriteLine($"Name: {name}");
             Console.WriteLine($"Account Number: {account_number}");
             WriteLine("= = = = = = = = = = = = =");
+        }
+
+        public void AccountNumber()
+        {
+            Console.WriteLine($"Account Number: #{this.account_number}");
+
         }
     }
 }
