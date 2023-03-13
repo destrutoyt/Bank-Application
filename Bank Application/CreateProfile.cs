@@ -32,10 +32,14 @@ namespace Bank_Application
             WriteLine("= = = = = = = = = = = = =");
         }
 
-        public void AccountNumber()
+        public void AccountInformation(BankAccount balance)
         {
+            WriteLine("= = = = = = = = = = = = =");
+            Console.WriteLine("ACCOUNT INFORMATION");
+            Console.WriteLine($"Account's Owner: {name}");
+            Console.WriteLine($"Balance: {balance.Balance:C}");
             Console.WriteLine($"Account Number: #{this.account_number}");
-
+            WriteLine("= = = = = = = = = = = = =");
         }
     }
 }

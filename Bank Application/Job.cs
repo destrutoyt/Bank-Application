@@ -8,22 +8,22 @@ namespace Bank_Application
 {
     public class Job
     {
-        public decimal PayH { get; private set; }
+        public decimal PayRate { get; private set; }
         public int Hours { get; private set; }
-        public decimal PayT { get; set; }
+        public decimal PayTotal { get; set; }
 
-        public Job(decimal payH, int hours)
+        public Job(decimal payRate, int hours)
         {
-            PayH = payH;
+            PayRate = payRate;
             Hours = hours;
         }
 
         public void DisplayPayment()
         {
-            PayT = PayH * Hours;
-            Console.WriteLine($"Pay Per Hour {PayH:C}!");
-            Console.WriteLine($"Hours Worked {Hours:C}!");
-            Console.WriteLine($"Total Pay: {PayT:C}!");
+            PayTotal = PayRate * Hours;
+            Console.WriteLine($"Pay Per Hour {PayRate:C}!");
+            Console.WriteLine($"Hours Worked {Hours}!");
+            Console.WriteLine($"Total Pay: {PayTotal:C}!");
         }
     }
 }

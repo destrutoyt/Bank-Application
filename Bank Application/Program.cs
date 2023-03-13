@@ -6,21 +6,21 @@ using static System.Console;
 //REGISTRATION / LOGIN
 string user = "none";
 string pass = "none";
-string passRule = "~!@#$%^&*()_+=-`/*-+/?.>,<';][}{:"; ///NOT ALLOWED
 string name = "none";
-string log_user = "none";
-string log_pass = "none";
-bool authorized = false; //FOR FUTURE REFERENCES
+string loginUser = "none";
+string loginPass = "none";
 
 //JOB
 decimal payRate = 12;
 
+//OTHERS
+Random random = new Random();
+int bank_account = random.Next(9999999); //Creates a random number for account number
+
 //OBJECTS
 var balance = new BankAccount(200m);
-var payment = new Job(0 , 0);
-
-//OTHERS
-bool goBack = false;
+var payment = new Job(0, 0);
+CreateAccount Profile = new CreateAccount("none", "none", "none", 0); //Calls constructor
 
 StartOfProgram:
 while (true) //GOES BACK TO MENU IF TRUE
@@ -35,7 +35,7 @@ while (true) //GOES BACK TO MENU IF TRUE
     WriteLine("4. Exit");
     Write("Enter your option (ONLY NUMBERS ALLOWED): ");
     int selection = Convert.ToInt16(ReadLine());
-    CreateAccount Profile = null;
+    WriteLine("");
     switch (selection)
     {
         case 1: //REGISTRATION
@@ -81,9 +81,7 @@ while (true) //GOES BACK TO MENU IF TRUE
             WriteLine("AMAZING! Now, let us do some backend work in order to pull out your bank account!");
             WriteLine("\n");
 
-            Random random = new Random();
-            int bank_account = random.Next(99999); //Creates a random number for account number
-            Profile = new CreateAccount(user, pass, name, bank_account); //Calls constructor
+            Profile = new CreateAccount(user, pass, name, bank_account); //Calls constructor and creates a new object
 
             Clear();
             Profile.Details(); //Calls Details Class
@@ -91,50 +89,40 @@ while (true) //GOES BACK TO MENU IF TRUE
             WriteLine("\n");
             WriteLine($"Welcome To The Ship Mr/Ms {name}!");
             WriteLine("You can now log-in into your bank account and guess what! We just gave you $200!");
-            goBack = true;
             break;
 
         case 2:
             WriteLine("LOG-IN\n");
             Write("Username: ");
-            log_user = ReadLine();
+            loginUser = ReadLine();
             Write("Password: ");
-            log_pass = Convert.ToString(ReadLine());
+            loginPass = Convert.ToString(ReadLine());
             WriteLine("\n");
 
-            while (log_user != user || log_pass != pass)
+            while (loginUser != user || loginPass != pass)
             {
                 WriteLine("It looks like either you are not registered or you inserted the wrong username/password");
                 Write("Username: ");
-                log_user = ReadLine();
+                loginUser = ReadLine();
                 Write("Password: ");
-                log_pass = Convert.ToString(ReadLine());
+                loginPass = Convert.ToString(ReadLine());
                 WriteLine("\n");
-                authorized= false;
             }
-            authorized= true;
             
             while (true)
             {
                 WriteLine(" = Welcome Back {0} = ", name);
                 WriteLine("MENU");
-                WriteLine("1. Account Information"); //NOT FINISHED
+                WriteLine("1. Account Information"); //FINISHED (Class CreateProfile Updated to return void method 
                 WriteLine("2. Work"); //WORK ON RETURNING UPDATED BALANCE VALUE
                 WriteLine("3. Log-Off"); //FINISHED (MIGHT ADD CONDITIONS FOR DOUBLE CONFIRMATION)
                 Write("Selection (MUST BE A NUMBER): ");
                 selection = Convert.ToInt32(ReadLine());
-
                 switch (selection)
                 {
                     case 1:
-                        if (Profile != null && Profile.AccountNumber != null)
-                        {
-                            Console.WriteLine("Balance: {0}", Profile.AccountNumber);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Profile or AccountInformation is null.");
-                        }
+                        Profile.AccountInformation(balance);
+                        WriteLine("");
                         break;
                     case 2:
                         while (true)
@@ -142,40 +130,41 @@ while (true) //GOES BACK TO MENU IF TRUE
                             WriteLine("");
                             WriteLine("Time to get some money!");
                             WriteLine($"Your current job pays you ${payRate}");
-                            Write("How many hours would you like to work per week? (MAX 40): ");
+                            Write("How many hours would you like to work this week? (MAX 40): ");
                             WriteLine("");
 
                             int input = Convert.ToInt32(ReadLine());
                             payment = new Job(payRate, input);
-                            balance.AddJob(payment.PayT);
 
                             while (input < 0 || input > 40)
                             {
-                                WriteLine("Wrong Input");
-                                Write("How many hours would you like to work per week? (MAX 40): ");
+                                WriteLine("Ups! You are either working too much or doing less than 0 hours!");
+                                Write("Try again! How many hours would you like to work this week? (MAX 40): ");
                                 input = Convert.ToInt32(ReadLine());
                                 payment = new Job(payRate, input);
-                                balance.AddJob(payment.PayT);
+                                balance.AddJob(payment);
                             }
-
-                            balance.AddJob(12);
-                            WriteLine("");
+                            balance.AddJob(payment);
+                            Clear();
                             WriteLine("You worked really hard this week!");
                             WriteLine("Keep up the amazing job and you might get a raise!");
+                            WriteLine("");
                             WriteLine($"DETAILS:"); //ERROR FIXED 3/6/2023
                             payment.DisplayPayment();
-                            WriteLine(balance.DisplayBalance());
+                            WriteLine(balance.DisplayBalance(payment.PayTotal));
                             WriteLine("");
                             break;
                         }
                         break;
                     case 3:
                         goto StartOfProgram; //NEW !!!
-                        break;
                 }
             }
+        case 3:
+            WriteLine("ADMIN ACCESS COMING SOON");
+            break;
     }
-    WriteLine("code was succesfully finished. If you see this, it means there were no fatal errors." +
+    WriteLine("This line of code was succesfully finished. If you see this, it means there were no fatal errors." +
         "However, logic errors are not tested which means that their success must be verified manually.");
 }
 //END OF CODE
