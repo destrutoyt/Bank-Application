@@ -18,12 +18,12 @@ namespace Bank_Application
             Hours = hours;
         }
 
-        public void DisplayPayment()
+        public void DisplayPaycheck()
         {
             PayTotal = PayRate * Hours;
-            Console.WriteLine($"Pay Per Hour {PayRate:C}!");
-            Console.WriteLine($"Hours Worked {Hours}!");
-            Console.WriteLine($"Total Pay: {PayTotal:C}!");
+            Console.WriteLine($"Pay Per Hour: {PayRate:C}/h");
+            Console.WriteLine($"Hours Worked: {Hours}H");
+            Console.WriteLine($"Total Pay: {PayTotal:C}");
         }
     }
 }

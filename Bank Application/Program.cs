@@ -3,115 +3,127 @@ using System.Security.Principal;
 using System.Text.RegularExpressions;
 using static System.Console;
 
+
+// BETA RELEASE by Miguel Angel Garces Lenis (ReWorked Version 1.0)
+
 //REGISTRATION / LOGIN
 string user = "none";
 string pass = "none";
-string name = "none";
+string firstName = "none";
 string loginUser = "none";
 string loginPass = "none";
 
 //JOB
 decimal payRate = 12;
+int weeksWorked = 0;
+decimal payRaise = 2;
 
 //OTHERS
 Random random = new Random();
 int bank_account = random.Next(9999999); //Creates a random number for account number
+int selection = 0; //MENU SELECTION
 
 //OBJECTS
-var balance = new BankAccount(200m);
-var payment = new Job(0, 0);
+var bankAccount = new BankAccount(200m); //START WITH $200 BALANCE BY CREATING NEW ACCOUNT
+var jobDetails = new Job(0, 0);
 CreateAccount Profile = new CreateAccount("none", "none", "none", 0); //Calls constructor
 
 StartOfProgram:
 while (true) //GOES BACK TO MENU IF TRUE
 {
-    WriteLine("Welcome to your Online Bank");
-    WriteLine("\n");
+    try
+    {
+        WriteLine("Welcome to your Online Bank");
+        WriteLine("\n");
 
-    WriteLine("== MENU ==");
-    WriteLine("1. Registration");
-    WriteLine("2. Log In");
-    WriteLine("3. Admin Access");
-    WriteLine("4. Exit");
-    Write("Enter your option (ONLY NUMBERS ALLOWED): ");
-    int selection = Convert.ToInt16(ReadLine());
+        WriteLine("== MENU ==");
+        WriteLine("1. Registration");
+        WriteLine("2. Log In");
+        WriteLine("3. Admin Access");
+        WriteLine("4. Exit");
+        Write("Enter your option (ONLY NUMBERS ALLOWED): ");
+        selection = Convert.ToInt16(ReadLine());
+    }
+    catch
+    {
+        WriteLine("You did not inserted a numeric input (0-9)!");
+        Thread.Sleep(1500);
+        Clear();
+    }
+
     WriteLine("");
     switch (selection)
     {
         case 1: //REGISTRATION
-            WriteLine("So we have a new member on our ship?!");
-            WriteLine("However, to join us, you must finish a required registration!");
-            WriteLine("Your security is our TOP PRIORITY, but you need to help us out!");
-            WriteLine("Enough of the boring text! Let's get you to the registration!");
+            Clear();
+            Write("New User: ");
+            user = ReadLine();
+            WriteLine("Saving..");
+            Thread.Sleep(2000); //DELAY 2 SECONDS (2000)
             WriteLine("\n");
-            WriteLine("Let's start off with your new and awesome username!");
-            Write("Write your username for log-in purposes: ");
-            user = Convert.ToString(ReadLine());
 
-            WriteLine("\n");
-            WriteLine("Awesome! Now let's get you to the most important part!");
-            WriteLine("Your password is important to keep you safe, so we decided to add some requirements for your safety");
-
-            WriteLine("REQUIREMENTS:\n1. Must be at least 5 characters long\n2. Cannot be your username\n" +
-                "Now, I will let your create your password!\n");
-
-            Write("Create your password (CASE SENSITIVE): ");
-            pass = Convert.ToString(ReadLine());
-
+            WriteLine("REQUIREMENTS:\n1. Must be at least 5 characters long\n2. Cannot be your username\n");
+            Write("Set Password: ");
+            pass = ReadLine();
             while (pass == user || pass.Length < 5)
             {
                 WriteLine("Ups! you did not follow our requirements :(");
-                Write("Try again, create a password: ");
-                pass = Convert.ToString(ReadLine());
+                Write("TRY AGAIN! Set Password: ");
+                pass = ReadLine();
+                WriteLine("\n");
             }
-            WriteLine("Great password! Please do not forget it!\n");
-            WriteLine("\nNow, we need your full name or at least your first name for legal purposes");
-            WriteLine("Don't worry about capitalization! Our system will do it for you!\nHowever, your name must not contain numbers or special characters!\n");
-            Write("Insert your Full Name or First Name: ");
-            name = Convert.ToString(ReadLine());
+            WriteLine("Saving..");
+            Thread.Sleep(2000); //DELAY 2 SECONDS
+            WriteLine("\n");
 
-            while (name == user || name.Length > 100 || !Regex.IsMatch(name, "^[a-zA-Z\\s]*$"))
+            Write("First Name: ");
+            firstName = Convert.ToString(ReadLine());
+
+            while (firstName == user || firstName.Length > 100 || !Regex.IsMatch(firstName, "^[a-zA-Z\\s]*$"))
             {
-                WriteLine("Ups! you did not insert a valid name");
-                Write("Try again, Insert your Full Name or First Name: ");
-                pass = Convert.ToString(ReadLine());
+                WriteLine("ERROR! You inserted an invalid name");
+                Write("First Name: ");
+                firstName = Convert.ToString(ReadLine());
+                WriteLine("\n");
             }
-
-            WriteLine("\n");
-            WriteLine("AMAZING! Now, let us do some backend work in order to pull out your bank account!");
-            WriteLine("\n");
-
-            Profile = new CreateAccount(user, pass, name, bank_account); //Calls constructor and creates a new object
+            Clear();
+            WriteLine("Saving..");
+            Thread.Sleep(1000); //DELAY 1 SECOND
+            Profile = new CreateAccount(user, pass, firstName, bank_account); //Calls constructor and creates a new object
+            WriteLine("Creating Account..");
+            Thread.Sleep(1000); //DELAY 1 SECOND
 
             Clear();
             Profile.Details(); //Calls Details Class
-
             WriteLine("\n");
-            WriteLine($"Welcome To The Ship Mr/Ms {name}!");
-            WriteLine("You can now log-in into your bank account and guess what! We just gave you $200!");
+            WriteLine($"Welcome To Your Online Bank, Mr/Ms {firstName}!");
+            WriteLine("You are now able to log-in into your account!");
+            Thread.Sleep(3000); //DELAY 3 SECOND
+            Clear();
             break;
 
         case 2:
-            WriteLine("LOG-IN\n");
+            Clear();
+            WriteLine("== LOG-IN ==");
             Write("Username: ");
             loginUser = ReadLine();
             Write("Password: ");
-            loginPass = Convert.ToString(ReadLine());
+            loginPass = ReadLine();
             WriteLine("\n");
 
             while (loginUser != user || loginPass != pass)
             {
-                WriteLine("It looks like either you are not registered or you inserted the wrong username/password");
+                WriteLine("ERROR! The password or username entered are incorrect!");
                 Write("Username: ");
                 loginUser = ReadLine();
                 Write("Password: ");
-                loginPass = Convert.ToString(ReadLine());
+                loginPass = loginPass = ReadLine();
                 WriteLine("\n");
             }
-
+            Clear();
             while (true)
             {
-                WriteLine(" = Welcome Back {0} = ", name);
+                WriteLine(" = Welcome {0} = ", firstName);
                 WriteLine("MENU");
                 WriteLine("1. Account Information"); //FINISHED (Class CreateProfile Updated to return void method 
                 WriteLine("2. Work"); //WORK ON RETURNING UPDATED BALANCE VALUE
@@ -121,50 +133,88 @@ while (true) //GOES BACK TO MENU IF TRUE
                 switch (selection)
                 {
                     case 1:
-                        Profile.AccountInformation(balance);
+                        Clear();
+                        WriteLine("Loading Account Information...");
+                        Thread.Sleep(2000);
+                        Clear();
+
+                        Profile.AccountInformation(bankAccount);
                         WriteLine("");
+                        WriteLine("Press ANY key to continue");
+                        ReadKey();
+                        Clear();
                         break;
                     case 2:
-                        while (true)
+                        int input = 0;
+                        try
                         {
-                            WriteLine("");
-                            WriteLine("Time to get some money!");
-                            WriteLine($"Your current job pays you ${payRate}");
-                            Write("How many hours would you like to work this week? (MAX 40): ");
-                            WriteLine("");
-
-                            int input = Convert.ToInt32(ReadLine());
-                            payment = new Job(payRate, input);
-
-                            while (input < 0 || input > 40)
-                            {
-                                WriteLine("Ups! You are either working too much or doing less than 0 hours!");
-                                Write("Try again! How many hours would you like to work this week? (MAX 40): ");
-                                input = Convert.ToInt32(ReadLine());
-                                payment = new Job(payRate, input);
-                                balance.AddJob(payment);
-                            }
-                            balance.AddJob(payment);
                             Clear();
-                            WriteLine("You worked really hard this week!");
-                            WriteLine("Keep up the amazing job and you might get a raise!");
                             WriteLine("");
-                            WriteLine($"DETAILS:"); //ERROR FIXED 3/6/2023
-                            payment.DisplayPayment();
-                            WriteLine(balance.DisplayBalance(payment.PayTotal));
+                            WriteLine("= WORK TIME =");
+                            WriteLine($"Current PayRate: ${payRate}/h - +${payRaise}/h per 5 weeks worked");
+                            WriteLine($"Weeks Worked: {weeksWorked}");
                             WriteLine("");
+                            Write("How many hours would you like to work this week? (MAX 40): ");
+
+                            input = Convert.ToInt32(ReadLine());
+                        }
+                        catch
+                        {
+                            WriteLine("ERROR! You did not inserted a correct number (0-40)!");
+                        }
+
+                        while (input < 0 || input > 40)
+                        {
+                          WriteLine("Ups! You are either working too much or doing less than 0 hours!");
+                          Write("TRY AGAIN! How many hours would you like to work this week? (MAX 40): ");
+                          input = Convert.ToInt32(ReadLine());
+                        }
+                        Clear();
+                        WriteLine("Working.....");
+                        Thread.Sleep(input * 100);
+                        jobDetails = new Job(payRate, input);
+                        bankAccount.AddJob(jobDetails);
+                        weeksWorked++;
+                        Clear();
+
+                        if (weeksWorked % 5 == 0)
+                        {
+                            WriteLine($"CONGRATULATIONS! You were given a raise of +${payRaise} for your hourly payrate");
+                            payRate += payRaise;
+                            WriteLine($"New Rate Available On Next Paycheck: ${payRate}/h");
+                        }
+                        WriteLine("You worked really hard this week!");
+                        WriteLine("Keep up the amazing job and you might get a raise!");
+                        WriteLine("");
+                        WriteLine($"DETAILS:"); //ERROR FIXED 3/6/2023
+                        jobDetails.DisplayPaycheck();
+                        WriteLine(bankAccount.DisplayBalance(jobDetails.PayTotal));
+                        WriteLine("");
+                        WriteLine("Press ANY key to go back to menu");
+                        ReadKey();
+                        Clear();
+                        break;
+                    case 3: //WILL WORK ON CONFIRMATION FEATURE SOON
+                        goto StartOfProgram; //NEW !!!
+
+                    default:
+                        {
+                            WriteLine("Invalid input");
+                            Clear();
                             break;
                         }
-                        break;
-                    case 3:
-                        goto StartOfProgram; //NEW !!!
                 }
             }
         case 3:
-            WriteLine("ADMIN ACCESS COMING SOON");
+            WriteLine("ADMIN CONTROL COMING SOON");
             break;
+
+        default:
+            {
+                WriteLine("Invalid input");
+                Clear();
+                break;
+            }
     }
-    WriteLine("This line of code was succesfully finished. If you see this, it means there were no fatal errors." +
-        "However, logic errors are not tested which means that their success must be verified manually.");
 }
 //END OF CODE
