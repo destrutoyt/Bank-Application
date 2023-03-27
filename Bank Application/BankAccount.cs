@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace Bank_Application
 {
-    public class BankAccount
+    public class BankAccount //WILL WORK ON THIS ON NEXT UPDATE!
     {
         public decimal Balance { get; private set; } //DECIMAL ITS MOSTLY USE FOR MONEY USES
 
@@ -17,7 +18,7 @@ namespace Bank_Application
 
         public void AddJob(Job totalPay) //WORKING!
         {
-            totalPay.DisplayPayment(); //CALCULATE TOTAL PAYMENT
+            totalPay.DisplayPaycheck(); //CALCULATE TOTAL PAYMENT
             Balance += totalPay.PayTotal;
         }
         public string DisplayBalance(decimal debug) //IF VOID METHOD IS USED, IT WILL NOT RETURN AN UPDATED BALANCE!!!
@@ -26,4 +27,3 @@ namespace Bank_Application
         }
     }
 }
-

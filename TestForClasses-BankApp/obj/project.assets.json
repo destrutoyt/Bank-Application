@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Miguel Garces\\Desktop\\C# Projects\\Bank Application\\Bank Application\\Bank Application.csproj",
-      "projectName": "Bank Application",
-      "projectPath": "C:\\Users\\Miguel Garces\\Desktop\\C# Projects\\Bank Application\\Bank Application\\Bank Application.csproj",
+      "projectUniqueName": "C:\\Users\\Miguel Garces\\Desktop\\C# Projects\\Bank Application\\TestForClasses-BankApp\\TestForClasses-BankApp.csproj",
+      "projectName": "TestForClasses-BankApp",
+      "projectPath": "C:\\Users\\Miguel Garces\\Desktop\\C# Projects\\Bank Application\\TestForClasses-BankApp\\TestForClasses-BankApp.csproj",
       "packagesPath": "C:\\Users\\Miguel Garces\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Miguel Garces\\Desktop\\C# Projects\\Bank Application\\Bank Application\\obj\\",
+      "outputPath": "C:\\Users\\Miguel Garces\\Desktop\\C# Projects\\Bank Application\\TestForClasses-BankApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Miguel Garces\\AppData\\Roaming\\NuGet\\NuGet.Config",
