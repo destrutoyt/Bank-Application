@@ -8,38 +8,40 @@ using static System.Console;
 
 namespace Bank_Application
 {
-    public class CreateFile : Account
+    public class CreateFile //CLASS IS ON HEAVY DEVELOPMENT
     {
-        string fileLocation = "";
+        string fileLocation = @"c:\temp\Statement From Bank App.txt";
         int creationDate = 0;
 
-        public CreateFile(string fileLocation, int creationDate) : base(user:"", password:"", name:"", account_number:0)
+        public void CreateStatement(BankAccount bankData, Account userData)
         {
-          this.fileLocation = fileLocation;
-          this.creationDate = creationDate;
-        }
+            if (File.Exists(fileLocation))
+            {
+                WriteLine("We updated the statement that is already on your computer!");
+                File.Delete(fileLocation);
+                Thread.Sleep(5000);
+            }
 
-        public void CreateStatement(BankAccount balance)
-        {
-            WriteLine("= Account Statement =");
-            WriteLine($"Account Owner: {User}");
-            WriteLine($"Account Number #{account_number}"); //MUST MAKE PROPERTY FOR ACCOUNT NUMBER!
-            WriteLine($"Balance As For {creationDate}: ${balance.Balance}");
-            WriteLine("");
-            WriteLine("DEPOSITS");
+            StreamWriter addText = new StreamWriter(fileLocation, true);
+            addText.WriteLine("= Account Statement =");
+            addText.WriteLine($"Account Owner: {userData.Name}");
+            addText.WriteLine($"Account Number #{userData.acco}"); //MUST MAKE PROPERTY FOR ACCOUNT NUMBER!
+            addText.WriteLine($"Balance As For {creationDate}: ${bankData.Balance}");
+            addText.WriteLine("");
+            addText.WriteLine("DEPOSITS");
 
             //MAKE AN ARRAY IN BankAccount TO GET DEPOSIT DATA
 
-            WriteLine($"Member Since: [CREATE NEW ATRIBUTE IN ACCOUNT CLASS]");
-            WriteLine("End of Statement");
-            WriteLine($"");
+            addText.WriteLine($"Member Since: [CREATE NEW ATRIBUTE IN ACCOUNT CLASS]");
+            addText.WriteLine("End of Statement");
+            addText.WriteLine($"");
+            addText.Close();
         }
         public void ErrorMessageForStatement()
         {
             WriteLine("There was an error trying to create your account statement");
-            WriteLine("Please, try the following possible solutions: ");
-            WriteLine("Make sure file location is correct and available (CRUCIAL)");
-            WriteLine("If you did not create an account, please do it! Data is collected from Account Class! (CRUCIAL)");
+            WriteLine("Please, try the following possible solution:");
+            WriteLine("Make sure you have more transactions. You need to have a least ONE deposit or transaction");
         }
     }
 }

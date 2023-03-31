@@ -18,14 +18,14 @@ namespace Bank_Application
         public string user = "";
         public string password = "";
         public string name = "";
-        public int account_number = 0;
+        private int account_number = 0;
 
         public Account(string user, string password, string name, int account_number) //CONSTRUCTOR
         {
             this.user = user;
             this.password = password;
             this.name = name;
-            this.account_number = account_number;
+            AccountNumber = account_number;
         }
         public void Details() //MUST BE DEVELOP
         {
@@ -39,14 +39,46 @@ namespace Bank_Application
 
         public void AccountInformation(BankAccount balance)
         {
-            WriteLine("= = = = = = = = = = = = =");
-            WriteLine("ACCOUNT INFORMATION");
-            WriteLine($"Account's Owner: {name}");
-            WriteLine($"Balance: {balance.Balance:C}");
-            WriteLine($"Account Number: #{this.account_number}");
-            WriteLine("= = = = = = = = = = = = =");
+            if (balance.Balance < 0)
+            {
+                WriteLine("= = = = = = = = = = = = =");
+                WriteLine("ACCOUNT INFORMATION");
+                WriteLine($"Account's Owner: {name}");
+                WriteLine($"Balance: {balance.Balance:C} YOU HAVE A NEGATIVE BALANCE!");
+                WriteLine($"Wallet: {balance.Wallet:C}");
+                WriteLine($"Account Number: #{this.account_number}");
+                WriteLine("= = = = = = = = = = = = =");
+            }
+            else
+            {
+                WriteLine("= = = = = = = = = = = = =");
+                WriteLine("ACCOUNT INFORMATION");
+                WriteLine($"Account's Owner: {name}");
+                WriteLine($"Balance: {balance.Balance:C}");
+                WriteLine($"Wallet: {balance.Wallet:C}");
+                WriteLine($"Account Number: #{this.account_number}");
+                WriteLine("= = = = = = = = = = = = =");
+            }
         }
-
-        public string User { get { return user; } }
+        public string User
+        {
+            get { return user; }
+            set { user = value; }
+        }
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        internal int AccountNumber
+        {
+            get { return account_number; }
+            set { account_number = value; }
+        }
     }
 }
