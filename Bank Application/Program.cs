@@ -7,7 +7,7 @@ class Program
 { 
     static public void Main(String[] args)
     {
-        // TEST RELEASE by Miguel Angel Garces Lenis (ReWorked Version 1.2_TEST)
+        // TEST RELEASE by Miguel Angel Garces Lenis (ReWorked Version 1.3_TEST)
 
         //REGISTRATION / LOGIN
         string user = "none";
@@ -23,7 +23,8 @@ class Program
 
         //OTHERS
         Random random = new Random();
-        int bank_account = random.Next(9999999); //Creates a random number for account number
+        int bank_account = random.Next(10000,99999); //Creates a random number for account number (ISSUE: Numbers are NOT unique!
+        int transactionID = random.Next(100,999);
         int selection = 0; //MENU SELECTION
         int input = 0; //MENU 2 SELECTION
         string stringInput = "";
@@ -65,7 +66,7 @@ class Program
                     Write("New User: ");
                     user = ReadLine();
                     WriteLine("Saving..");
-                    Thread.Sleep(2000); //DELAY 2 SECONDS (2000)
+                    Thread.Sleep(0); //DELAY 2 SECONDS (2000)
                     WriteLine("\n");
 
                     WriteLine("REQUIREMENTS:\n1. Must be at least 5 characters long\n2. Cannot be your username\n");
@@ -140,12 +141,12 @@ class Program
                     Clear();
                     while (true)
                     {
-                        WriteLine(" = Welcome {0} = ", firstName);
+                        WriteLine(" = Welcome Back {0}! = ", firstName);
                         WriteLine("MENU");
                         WriteLine("1. Account Information");
                         WriteLine("2. Work");
                         WriteLine("3. Withdrawl"); //FINISHED (3/31/2023)
-                        WriteLine("4. Item Store"); //WORKING ON IT
+                        WriteLine("4. Deposit"); //WORKING ON IT
                         WriteLine("5. Get Statement"); //WORKING ON IT
                         WriteLine("6. Log-Off"); //goto statement must go DUH
                         Write("Selection (MUST BE A NUMBER): ");
@@ -192,7 +193,8 @@ class Program
                                 WriteLine("Working.....");
                                 Thread.Sleep(input * 100);
                                 jobDetails = new Job(payRate, input);
-                                bankAccount.AddJob(jobDetails);
+                                transactionID = random.Next(100, 999);
+                                bankAccount.AddJob(jobDetails, transactionID, "Work Pay");
                                 weeksWorked++;
                                 Clear();
 
@@ -223,7 +225,7 @@ class Program
                                     WriteLine($"Available Balance: {bankAccount.Balance:C}");
                                     WriteLine("");
                                     Write("How much money would you like to withdrawl? $");
-                                    withdrawl = Convert.ToInt32(ReadLine());
+                                    withdrawl = Convert.ToDecimal(ReadLine());
                                 }
                                 catch
                                 {
@@ -240,11 +242,12 @@ class Program
                                     WriteLine("You are trying to withdrawl more money than you have");
                                     WriteLine("If you continue, you will be charged $100 as a fee");
                                     Write("Would you like to continue? (Y/N) > ");
-                                    stringInput = Convert.ToString(ReadLine());
+                                    stringInput = Convert.ToString(ReadLine().ToUpper());
 
-                                    if (stringInput == "y")
+                                    if (stringInput == "Y" || stringInput == "YES")
                                     {
-                                        bankAccount.OverWithdrawl(withdrawl);
+                                        transactionID = random.Next(100, 999);
+                                        bankAccount.OverWithdrawl(withdrawl, transactionID, "Withdrawl");
                                         break;
                                     }
                                     else
@@ -255,21 +258,67 @@ class Program
                                 }
                                 else
                                 {
-                                    bankAccount.Withdrawl(withdrawl);
+                                    transactionID = random.Next(100, 999);
+                                    bankAccount.Withdrawl(withdrawl, transactionID, "Withdrawl");
                                     break;
                                 }
+
                             case 4:
-                                BankStatement.CreateStatement(bankAccount, Profile);
-                                break;
+                                Clear();
+                                decimal deposit = 0;
+                                try
+                                {
+                                    WriteLine("= ATM MACHINE =");
+                                    WriteLine($"Wallet: {bankAccount.Wallet:C}");
+                                    WriteLine("");
+                                    Write("How much money would you like to deposit to your bank account? $");
+                                    deposit = Convert.ToDecimal(ReadLine());
+                                }
+                                catch
+                                {
+                                    WriteLine("Your input is NOT numeric! Going back to main menu!");
+                                    Thread.Sleep(4000);
+                                    Clear();
+                                    break;
+                                }
+                                if (deposit > bankAccount.Wallet)
+                                {
+                                    Clear();
+                                    WriteLine("ATTENTION");
+                                    WriteLine("You don't have this amount of money to deposit");
+                                    WriteLine("Closing ATM....");
+                                    Thread.Sleep(3500);
+                                    Clear();
+                                    break;
+                                }
+                                else
+                                {
+                                    transactionID = random.Next(100, 999);
+                                    bankAccount.Deposit(deposit, transactionID, "Deposit");
+                                    break;
+                                }
+
                             case 5:
-                                BankStatement.CreateStatement(bankAccount, Profile);
-                                break;
+
+                                if(bankAccount.transactionId.Count < 1)
+                                {
+                                    BankStatement.ErrorMessageStatement();
+                                    Thread.Sleep(5000);
+                                    break;
+                                }
+                                else
+                                {
+                                    BankStatement.CreateStatement(bankAccount, Profile);
+                                    break;
+
+                                }
+
                             case 6: //WILL WORK ON CONFIRMATION FEATURE SOON
                                 goto StartOfProgram; //NEW !!! (Must be removed)
 
                             default:
                                 {
-                                    WriteLine("Invalid input");
+                                    WriteLine("DEBUG: Invalid input");
                                     Clear();
                                     break;
                                 }
@@ -278,10 +327,16 @@ class Program
                 case 3:
                     WriteLine("ADMIN CONTROL COMING SOON");
                     break;
+                case 4:
+                    WriteLine("Exiting app...");
+                    Thread.Sleep(2500);
+                    Clear();
+                    Environment.Exit(1);
+                    break;
 
                 default:
                     {
-                        WriteLine("Invalid input");
+                        WriteLine("DEBUG: Invalid input");
                         Clear();
                         break;
                     }

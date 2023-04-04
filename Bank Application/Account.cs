@@ -75,7 +75,7 @@ namespace Bank_Application
             get { return name; }
             set { name = value; }
         }
-        internal int AccountNumber
+        public int AccountNumber
         {
             get { return account_number; }
             set { account_number = value; }
