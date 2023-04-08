@@ -10,12 +10,11 @@ using System.Collections;
 
 namespace Bank_Application
 {
-    public class CreateFile //CLASS IS ON HEAVY DEVELOPMENT
+    public class CreateFile //CLASS IS ON A BETA STATE!
     {
-        string fileLocation = @"c:\temp\Statement From Bank App2.txt";
-        int creationDate = 0;
+        string fileLocation = @"c:\temp\Statement From Bank App.txt"; //Admin can change it
 
-        public void CreateStatement(BankAccount bankData, Account userData)
+        public void CreateStatement(BankAccount bankData, Account userData, DateTime creationDate)   
         {
             if (File.Exists(fileLocation))
             {
@@ -41,10 +40,13 @@ namespace Bank_Application
                 addText.WriteLine($"${data.a} - Type: {data.t} - ID: {data.i}");
             }
             WriteLine("");
-            addText.WriteLine($"Member Since: [CREATE NEW ATRIBUTE IN ACCOUNT CLASS]");
             addText.WriteLine("End of Statement");
             addText.WriteLine($"");
             addText.Close();
+            WriteLine($"Your Statement was created in {fileLocation}");
+            Thread.Sleep(3000);
+            Clear();
+
         }
         public void ErrorMessageStatement()
         {

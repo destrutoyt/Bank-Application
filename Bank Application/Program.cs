@@ -7,14 +7,10 @@ class Program
 { 
     static public void Main(String[] args)
     {
-        // TEST RELEASE by Miguel Angel Garces Lenis (ReWorked Version 1.3_TEST)
+        // OFFICIAL RELEASE by Miguel Angel Garces Lenis (ReWorked Version 2.0)
 
         //REGISTRATION / LOGIN
-        string user = "none";
-        string pass = "none";
-        string firstName = "none";
-        string loginUser = "none";
-        string loginPass = "none";
+        string user="test", pass="test",firstName="test",loginUser,loginPass;
 
         //JOB
         decimal payRate = 12;
@@ -23,16 +19,16 @@ class Program
 
         //OTHERS
         Random random = new Random();
-        int bank_account = random.Next(10000,99999); //Creates a random number for account number (ISSUE: Numbers are NOT unique!
+        int bank_account = random.Next(10000,99999); //Creates a random number for account number
         int transactionID = random.Next(100,999);
-        int selection = 0; //MENU SELECTION
-        int input = 0; //MENU 2 SELECTION
+        int selection = 0, input = 0; //MENU SELECTION
         string stringInput = "";
+        decimal deposit = 0, withdrawl = 0;
 
         //OBJECTS
         var bankAccount = new BankAccount(200m); //START WITH $200 BALANCE BY CREATING NEW ACCOUNT
         var jobDetails = new Job(0, 0);
-        Account Profile = new Account("test", "test", "test", 0000);  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES (Not null due to testing)
+        Account? Profile = null;  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
         CreateFile BankStatement = new CreateFile();
 
     StartOfProgram:
@@ -96,7 +92,7 @@ class Program
                     Clear();
                     WriteLine("Saving..");
                     Thread.Sleep(1000); //DELAY 1 SECOND
-                    Profile = new Account(user, pass, firstName, bank_account); //Calls constructor and creates a new object
+                    Profile = new Account(user, pass, firstName, bank_account); //creates a new object
                     WriteLine("Creating Account..");
                     Thread.Sleep(1000); //DELAY 1 SECOND
 
@@ -145,10 +141,10 @@ class Program
                         WriteLine("MENU");
                         WriteLine("1. Account Information");
                         WriteLine("2. Work");
-                        WriteLine("3. Withdrawl"); //FINISHED (3/31/2023)
-                        WriteLine("4. Deposit"); //WORKING ON IT
-                        WriteLine("5. Get Statement"); //WORKING ON IT
-                        WriteLine("6. Log-Off"); //goto statement must go DUH
+                        WriteLine("3. Withdrawl");
+                        WriteLine("4. Deposit");
+                        WriteLine("5. Get Statement"); 
+                        WriteLine("6. Log-Off");
                         Write("Selection (MUST BE A NUMBER): ");
                         selection = Convert.ToInt32(ReadLine());
                         switch (selection)
@@ -218,7 +214,6 @@ class Program
                                 break;
                             case 3: //Added new Methods!
                                 Clear();
-                                decimal withdrawl = 0;
                                 try
                                 {
                                     WriteLine("= ATM MACHINE =");
@@ -265,7 +260,6 @@ class Program
 
                             case 4:
                                 Clear();
-                                decimal deposit = 0;
                                 try
                                 {
                                     WriteLine("= ATM MACHINE =");
@@ -299,7 +293,7 @@ class Program
                                 }
 
                             case 5:
-
+                                Clear();
                                 if(bankAccount.transactionId.Count < 1)
                                 {
                                     BankStatement.ErrorMessageStatement();
@@ -308,12 +302,13 @@ class Program
                                 }
                                 else
                                 {
-                                    BankStatement.CreateStatement(bankAccount, Profile);
+                                    BankStatement.CreateStatement(bankAccount, Profile, DateTime.Now);
                                     break;
 
                                 }
 
                             case 6: //WILL WORK ON CONFIRMATION FEATURE SOON
+                                Clear();
                                 goto StartOfProgram; //NEW !!! (Must be removed)
 
                             default:

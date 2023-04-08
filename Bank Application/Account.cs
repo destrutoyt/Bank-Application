@@ -13,7 +13,7 @@ using static System.Console;
 
 namespace Bank_Application
 {
-    public class Account //MUST FINISH BEFORE CONTINUING WITH ANOTHER CLASS (PARTIAL COMPLETION)
+    public class Account
     {
         public string user = "";
         public string password = "";
@@ -27,7 +27,7 @@ namespace Bank_Application
             this.name = name;
             AccountNumber = account_number;
         }
-        public void Details() //MUST BE DEVELOP
+        public void Details() //More Data Soon..
         {
             WriteLine("= = = = = = = = = = = = =");
             WriteLine("PROFILE DETAILS");

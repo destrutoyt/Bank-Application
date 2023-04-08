@@ -8,7 +8,8 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Miguel Garces\\.nuget\\packages\\": {}
+    "C:\\Users\\Miguel Garces\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
@@ -19,8 +20,12 @@
       "packagesPath": "C:\\Users\\Miguel Garces\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Miguel Garces\\Desktop\\C# Projects\\Bank Application\\Bank Application\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\Miguel Garces\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

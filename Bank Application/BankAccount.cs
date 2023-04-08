@@ -7,10 +7,10 @@ using static System.Console;
 
 namespace Bank_Application
 {
-    public class BankAccount //WILL WORK ON THIS ON NEXT UPDATE!
+    public class BankAccount 
     {
         public List<decimal> transactionAmount = new List<decimal>();
-        public List<int> transactionId = new List<int>();  //Remove it?
+        public List<int> transactionId = new List<int>();
         public List<string> transactionType = new List<string>(); 
 
         public BankAccount(decimal initialBalance)
@@ -96,6 +96,6 @@ namespace Bank_Application
             Clear();
         }
         public decimal Balance { get; set; } //DECIMAL ITS MOSTLY USE FOR MONEY USES
-        public decimal Wallet { get; set; } //READY TO TEST!
+        public decimal Wallet { get; set; }
     }
 }
