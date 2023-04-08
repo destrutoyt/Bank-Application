@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
+
 
 namespace Bank_Application
 {
@@ -21,9 +23,9 @@ namespace Bank_Application
         public void DisplayPaycheck()
         {
             PayTotal = PayRate * Hours;
-            Console.WriteLine($"Pay Per Hour: {PayRate:C}/h");
-            Console.WriteLine($"Hours Worked: {Hours}H");
-            Console.WriteLine($"Total Pay: {PayTotal:C}");
+            WriteLine($"Pay Per Hour: {PayRate:C}/h");
+            WriteLine($"Hours Worked: {Hours}H");
+            WriteLine($"Total Pay: {PayTotal:C}");
         }
     }
 }
