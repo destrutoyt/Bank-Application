@@ -21,6 +21,13 @@ namespace Bank_Application
         {
             return $"New Balance: {Balance:C}";
         }
+        public void InsufficientFunds() //FOR FUTURE REFERENCES
+        {
+            WriteLine("Ups! Our Anti-Debt System detected insufficient funds to access the shop menu");
+            WriteLine("You need to have at least $799 in your wallet or bank account to get access!");
+            WriteLine($"Current Balance: {Balance:C} \nWallet: {Wallet:C}");
+            ReadLine();
+        }
         public void AddJob(Job jobData, int transactionID, string transactionInfo)
         {
             jobData.DisplayPaycheck(); //CALCULATE TOTAL PAYMENT

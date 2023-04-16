@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank Application", "Bank Application\Bank Application.csproj", "{E4FB3BA6-9BFE-4388-A010-E0E098BED3C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForClasses-BankApp", "TestForClasses-BankApp\TestForClasses-BankApp.csproj", "{3857BE60-E1F4-4A12-953B-4A2205EC0D95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestForClasses-BankApp", "TestForClasses-BankApp\TestForClasses-BankApp.csproj", "{3857BE60-E1F4-4A12-953B-4A2205EC0D95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

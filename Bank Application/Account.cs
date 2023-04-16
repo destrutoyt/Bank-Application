@@ -15,9 +15,11 @@ namespace Bank_Application
 {
     public class Account
     {
-        public string user = "";
-        public string password = "";
-        public string name = "";
+        string user = "";
+        string password = "";
+        string name = "";
+        bool antiDebt = false; //FOR FUTURE UPDATE!!!
+        bool taxReducer = false;
         private int account_number = 0;
 
         public Account(string user, string password, string name, int account_number) //CONSTRUCTOR
@@ -39,7 +41,7 @@ namespace Bank_Application
 
         public void AccountInformation(BankAccount balance)
         {
-            if (balance.Balance < 0)
+            if (balance.Balance < -1)
             {
                 WriteLine("= = = = = = = = = = = = =");
                 WriteLine("ACCOUNT INFORMATION");

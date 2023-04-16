@@ -17,19 +17,24 @@ class Program
         int weeksWorked = 0;
         decimal payRaise = 2;
 
-        //OTHERS
+        //TRANSACTIONS & SHOP
         Random random = new Random();
         int bank_account = random.Next(10000, 99999); //Creates a random number for account number
-        int transactionID = random.Next(100, 999);
+        int randomID = random.Next(100, 999);
+        bool hasAccess = false;
+        string[] shopItems = {"- PS5 Bundle ($799)", "- High-End PC ($2999)", "- Luxury Clothes ($6999)", "- Used 2010 Nissan Sentra ($10000)", "- 2023 Nissan GTR ($50000)", };
+
+        //OTHERS
         int selection = 0, input = 0; //MENU SELECTION
         string stringInput = "";
         decimal deposit = 0, withdrawl = 0;
 
         //OBJECTS
-        var bankAccount = new BankAccount(200m); //START WITH $200 BALANCE BY CREATING NEW ACCOUNT
+        var bankAccount = new BankAccount(800m); //START WITH $200 BALANCE BY CREATING NEW ACCOUNT
         var jobDetails = new Job(0, 0);
-        Account? Profile = null;  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
+        Account Profile = new Account("test", "test", "test", 00);  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
         CreateFile BankStatement = new CreateFile();
+        ShopItem? ItemShop = null;
 
     StartOfProgram:
         while (true) //GOES BACK TO MENU IF TRUE
@@ -62,7 +67,7 @@ class Program
                     Write("New User: ");
                     user = ReadLine();
                     WriteLine("Saving..");
-                    Thread.Sleep(0); //DELAY 2 SECONDS (2000)
+                    Thread.Sleep(2000); //DELAY 2 SECONDS (2000)
                     WriteLine("\n");
 
                     WriteLine("REQUIREMENTS:\n1. Must be at least 5 characters long\n2. Cannot be your username\n");
@@ -143,10 +148,18 @@ class Program
                         WriteLine("2. Work");
                         WriteLine("3. Withdrawl");
                         WriteLine("4. Deposit");
-                        WriteLine("5. Get Statement");
-                        WriteLine("6. Log-Off");
-                        Write("Selection (MUST BE A NUMBER): ");
-                        selection = Convert.ToInt32(ReadLine());
+                        WriteLine("5. Shop");
+                        WriteLine("6. Get Statement");
+                        WriteLine("7. Log-Off");
+                        try
+                        {
+                            Write("Selection (MUST BE A NUMBER): ");
+                            selection = Convert.ToInt32(ReadLine());
+                        }
+                        catch
+                        {
+                            WriteLine("ERROR! You did not inserted a numeric value !");
+                        }
                         switch (selection)
                         {
                             case 1:
@@ -189,8 +202,8 @@ class Program
                                 WriteLine("Working.....");
                                 Thread.Sleep(input * 100);
                                 jobDetails = new Job(payRate, input);
-                                transactionID = random.Next(100, 999);
-                                bankAccount.AddJob(jobDetails, transactionID, "Work Pay");
+                                randomID = random.Next(100, 999);
+                                bankAccount.AddJob(jobDetails, randomID, "Work Pay");
                                 weeksWorked++;
                                 Clear();
 
@@ -241,8 +254,8 @@ class Program
 
                                     if (stringInput == "Y" || stringInput == "YES")
                                     {
-                                        transactionID = random.Next(100, 999);
-                                        bankAccount.OverWithdrawl(withdrawl, transactionID, "Withdrawl");
+                                        randomID = random.Next(100, 999);
+                                        bankAccount.OverWithdrawl(withdrawl, randomID, "Withdrawl");
                                         break;
                                     }
                                     else
@@ -253,8 +266,8 @@ class Program
                                 }
                                 else
                                 {
-                                    transactionID = random.Next(100, 999);
-                                    bankAccount.Withdrawl(withdrawl, transactionID, "Withdrawl");
+                                    randomID = random.Next(100, 999);
+                                    bankAccount.Withdrawl(withdrawl, randomID, "Withdrawl");
                                     break;
                                 }
 
@@ -271,7 +284,7 @@ class Program
                                 catch
                                 {
                                     WriteLine("Your input is NOT numeric! Going back to main menu!");
-                                    Thread.Sleep(4000);
+                                    Thread.Sleep(3500);
                                     Clear();
                                     break;
                                 }
@@ -287,12 +300,55 @@ class Program
                                 }
                                 else
                                 {
-                                    transactionID = random.Next(100, 999);
-                                    bankAccount.Deposit(deposit, transactionID, "Deposit");
+                                    randomID = random.Next(100, 999);
+                                    bankAccount.Deposit(deposit, randomID, "Deposit");
                                     break;
                                 }
 
                             case 5:
+                                Clear();
+                                WriteLine("== Shopping Store ==");
+                                WriteLine("NOTE: You are limited to ONE item!");
+                                WriteLine("");
+                                WriteLine("Available Products:");
+                                foreach (string i in shopItems)
+                                {
+                                   WriteLine(i);
+                                }
+                                try
+                                {
+                                    Write("");
+                                    Write("Which one would you like to buy? (0-5)");
+                                    input = Convert.ToInt32(ReadLine());
+                                }
+                                catch
+                                {
+                                    WriteLine("Your input is NOT numeric! Going back to main menu!");
+                                    Thread.Sleep(3500);
+                                    Clear();
+                                    break;
+                                }
+                                while (input > 5)
+                                {
+                                    WriteLine("You must pick a number between 0 to 5");
+                                    Write("TRY AGAIN! Which one would you like to buy? (0-5)");
+                                    input = Convert.ToInt32(ReadLine());
+                                }
+                                Clear();
+                                ItemShop = new ShopItem(input);
+                                ItemShop.VerifyPayment(bankAccount);
+
+                                if (ItemShop.payVerification == false)
+                                {
+                                    ItemShop.PaymentDenied();
+                                    break;
+                                }
+                                else
+                                {
+                                    ItemShop.PurchasingProduct(shopItems[input], bankAccount, randomID, "Purchase");
+                                    break;
+                                }
+                            case 6:
                                 Clear();
                                 if (bankAccount.transactionId.Count < 1)
                                 {
@@ -306,8 +362,7 @@ class Program
                                     break;
 
                                 }
-
-                            case 6: //WILL WORK ON CONFIRMATION FEATURE SOON
+                            case 7: //WILL WORK ON CONFIRMATION FEATURE SOON
                                 Clear();
                                 goto StartOfProgram; //NEW !!! (Must be removed)
 
