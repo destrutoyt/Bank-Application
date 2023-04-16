@@ -7,7 +7,7 @@ class Program
 {
     static public void Main(String[] args)
     {
-        // OFFICIAL RELEASE by Miguel Angel Garces Lenis (ReWorked Version 2.0)
+        // OFFICIAL RELEASE by Miguel Angel Garces Lenis (ReWorked Version 2.5)
 
         //REGISTRATION / LOGIN
         string user = "test", pass = "test", firstName = "test", loginUser, loginPass;
@@ -30,9 +30,9 @@ class Program
         decimal deposit = 0, withdrawl = 0;
 
         //OBJECTS
-        var bankAccount = new BankAccount(800m); //START WITH $200 BALANCE BY CREATING NEW ACCOUNT
+        var bankAccount = new BankAccount(100m); //START WITH $100 BALANCE BY CREATING NEW ACCOUNT
         var jobDetails = new Job(0, 0);
-        Account Profile = new Account("test", "test", "test", 00);  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
+        Account? Profile = null;  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
         CreateFile BankStatement = new CreateFile();
         ShopItem? ItemShop = null;
 
@@ -364,7 +364,7 @@ class Program
                                 }
                             case 7: //WILL WORK ON CONFIRMATION FEATURE SOON
                                 Clear();
-                                goto StartOfProgram; //NEW !!! (Must be removed)
+                                goto StartOfProgram; // (Must be removed)
 
                             default:
                                 {

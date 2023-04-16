@@ -20,7 +20,7 @@ namespace Bank_Application
             this.itemIndex = itemIndex;
         }
 
-        public bool VerifyTransaction(BankAccount bankData)
+        public bool VerifyPayment(BankAccount bankData)
         {
             taxAmount = (decimal)(itemPrice[itemIndex] * TAXRATE); // Ex. A * 5.75 ----> A would be number from the array itemPrice depending on the index inputed. 
             subTotal = itemPrice[itemIndex];
