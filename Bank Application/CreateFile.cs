@@ -25,10 +25,10 @@ namespace Bank_Application
             }
 
             StreamWriter addText = new StreamWriter(fileLocation, true);
-            addText.WriteLine("= Account Statement =");
+            addText.WriteLine("== Account Statement ==");
             addText.WriteLine($"Account Owner: {userData.Name}");
             addText.WriteLine($"Account Number #{userData.AccountNumber}"); //MUST MAKE PROPERTY FOR ACCOUNT NUMBER!
-            addText.WriteLine($"Balance As For {creationDate}: ${bankData.Balance}");
+            addText.WriteLine($"Current Balance: ${bankData.Balance}");
             addText.WriteLine("");
             addText.WriteLine("DEPOSITS / TRANSACTIONS");
 
@@ -39,12 +39,16 @@ namespace Bank_Application
             {
                 addText.WriteLine($"${data.a} - Type: {data.t} - ID: {data.i}");
             }
-            WriteLine("");
+            addText.WriteLine("");
             addText.WriteLine("End of Statement");
-            addText.WriteLine($"");
+            addText.WriteLine("");
+            addText.WriteLine("");
+            addText.WriteLine("");
+            addText.WriteLine("Created by Bank App");
             addText.Close();
             WriteLine($"Your Statement was created in {fileLocation}");
-            Thread.Sleep(3000);
+            WriteLine("Press ANY key to continue");
+            ReadKey();
             Clear();
 
         }
@@ -52,7 +56,7 @@ namespace Bank_Application
         {
             WriteLine("There was an error trying to create your account statement");
             WriteLine("Please, try the following possible solution:");
-            WriteLine("Make sure you have more transactions. You need to have a least TWO deposit or transaction");
+            WriteLine("Make sure you have more transactions. You need to have a least TWO deposits or transactions");
         }
     }
 }

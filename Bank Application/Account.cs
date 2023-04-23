@@ -18,8 +18,8 @@ namespace Bank_Application
         string user = "";
         string password = "";
         string name = "";
-        bool antiDebt = false; //FOR FUTURE UPDATE!!!
-        bool taxReducer = false;
+        public bool taxReducer = false;
+        public bool storeDiscount = false;
         private int account_number = 0;
 
         public Account(string user, string password, string name, int account_number) //CONSTRUCTOR
@@ -29,7 +29,7 @@ namespace Bank_Application
             this.name = name;
             AccountNumber = account_number;
         }
-        public void Details() //More Data Soon..
+        public void Details()
         {
             WriteLine("= = = = = = = = = = = = =");
             WriteLine("PROFILE DETAILS");
@@ -39,6 +39,42 @@ namespace Bank_Application
             WriteLine("= = = = = = = = = = = = =");
         }
 
+        public void ProfileUpgrades(BankAccount bankData, decimal price, string upgradeName, string transactionType)
+        {
+            if (upgradeName == "STORE")
+            {
+                WriteLine("Starting upgrade transaction....");
+
+                bankData.Balance -= 250;
+                bankData.transactionAmount.Add(price);
+                bankData.transactionType.Add(transactionType);
+                storeDiscount = true;
+                Thread.Sleep(3000);
+                Clear();
+                WriteLine("CONGRATULATIONS ON YOUR NEW UPGRADE!");
+                WriteLine("You can now enjoy 25% off for all purchases!");
+                WriteLine("Press ANY key to continue");
+                ReadKey();
+                Clear();
+            }
+            else
+            {
+                WriteLine("Starting upgrade transaction....");
+
+                bankData.Balance -= 250;
+                bankData.transactionAmount.Add(price);
+                bankData.transactionType.Add(transactionType);
+                taxReducer = true;
+                Thread.Sleep(3000);
+                Clear();
+                WriteLine("CONGRATULATIONS ON YOUR NEW UPGRADE!");
+                WriteLine("You can now get 2.25% off your sales tax for all purchases!");
+                WriteLine("Press ANY key to continue");
+                ReadKey();
+                Clear();
+            }
+        }
+
         public void AccountInformation(BankAccount balance)
         {
             if (balance.Balance < -1)
@@ -46,9 +82,23 @@ namespace Bank_Application
                 WriteLine("= = = = = = = = = = = = =");
                 WriteLine("ACCOUNT INFORMATION");
                 WriteLine($"Account's Owner: {name}");
-                WriteLine($"Balance: {balance.Balance:C} YOU HAVE A NEGATIVE BALANCE!");
+                WriteLine($"Balance: -{balance.Balance:C}");
                 WriteLine($"Wallet: {balance.Wallet:C}");
                 WriteLine($"Account Number: #{this.account_number}");
+                WriteLine("");
+                WriteLine("OWNED PURCHASES");
+                if (taxReducer == true)
+                {
+                    WriteLine("Tax Reducer = ACTIVATED");
+                }
+                if (storeDiscount == true)
+                {
+                    WriteLine("Store Discount = ACTIVATED");
+                }   
+                else
+                {
+                    WriteLine("none");
+                }
                 WriteLine("= = = = = = = = = = = = =");
             }
             else
@@ -59,6 +109,20 @@ namespace Bank_Application
                 WriteLine($"Balance: {balance.Balance:C}");
                 WriteLine($"Wallet: {balance.Wallet:C}");
                 WriteLine($"Account Number: #{this.account_number}");
+                WriteLine("");
+                WriteLine("OWNED PURCHASES");
+                if (taxReducer == true)
+                {
+                    WriteLine("Tax Reducer = ACTIVATED");
+                }
+                if (storeDiscount == true)
+                {
+                    WriteLine("Store Discount = ACTIVATED");
+                }
+                else
+                {
+                    WriteLine("none");
+                }
                 WriteLine("= = = = = = = = = = = = =");
             }
         }
