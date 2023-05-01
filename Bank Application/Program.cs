@@ -13,9 +13,9 @@ class Program
         string user = "test", pass = "test", firstName = "test", loginUser, loginPass;
 
         //JOB
-        decimal payRate = 14;
         int weeksWorked = 0;
-        decimal payRaise = 2;
+        int weeksLeft = 10;
+        int levelIndex = 0;
         decimal extraFees = 0;
 
         //TRANSACTIONS & SHOP
@@ -27,10 +27,12 @@ class Program
         //OTHERS
         int selection = 0, input = 0; //MENU SELECTION VARIABLES
         string stringInput = "";
+        bool breakFlag = true;
 
         //OBJECTS
         var bankAccount = new BankAccount(50m); //START WITH $50 BALANCE BY CREATING NEW ACCOUNT
-        var jobDetails = new Job(0, 0, 0);
+        var payDetails = new PayChecks(0, 0, 0);
+        var jobDetails = new Jobs();
         Account? Profile = null;  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
         CreateFile BankStatement = new CreateFile();
         ShopItem ItemShop = new ShopItem(0);
@@ -141,6 +143,7 @@ class Program
                     Clear();
                     while (true)
                     {
+                        breakFlag = true;
                         WriteLine(" = Welcome Back {0}! = ", firstName);
                         WriteLine("");
                         WriteLine("MENU");
@@ -203,7 +206,7 @@ class Program
                                             }
                                             if (Profile.storeDiscount == false)
                                             {
-                                                WriteLine("Store Discount ($250) > Get a 25% discount for all purchases");
+                                                WriteLine("Store Discount ($500) > Get a 25% discount for all purchases");
                                             }
 
                                             try
@@ -229,7 +232,7 @@ class Program
                                                 }
                                                 else
                                                 {
-                                                    Profile.ProfileUpgrades(bankAccount, 250, "STORE", "Upgrade (No-ID)");
+                                                    Profile.ProfileUpgrades(bankAccount, 500, "STORE", "Upgrade (No-ID)");
                                                     break;
                                                 }
                                             }
@@ -274,63 +277,169 @@ class Program
                                 }
                                 break;
                             case 2:
-                                try
-                                {
-                                    Clear();
-                                    WriteLine("");
-                                    WriteLine("= WORK TIME =");
-                                    WriteLine($"Current PayRate: ${payRate}/h - +${payRaise}/h per 5 weeks worked");
-                                    WriteLine($"Weeks Worked: {weeksWorked}");
-                                    WriteLine("");
-                                    Write("How many hours would you like to work this week? (MAX 40): ");
-
-                                    input = Convert.ToInt32(ReadLine());
-                                }
-                                catch
-                                {
-                                    WriteLine("ERROR! You did not inserted a correct number (0-40)!");
-                                }
-
-                                while (input < 0 || input > 40)
-                                {
-                                    WriteLine("Ups! You are either working too much or doing less than 0 hours!");
-                                    Write("TRY AGAIN! How many hours would you like to work this week? (MAX 40): ");
-                                    input = Convert.ToInt32(ReadLine());
-                                }
                                 Clear();
-                                WriteLine("Working.....");
-                                if (Profile.taxReducer == true)
+                                while (breakFlag == true)
                                 {
-                                    extraFees = 250;
-
-                                    if (Profile.storeDiscount == true)
+                                    try
                                     {
-                                        extraFees += 250;
+                                        WriteLine("= JOB MENU =");
+                                        WriteLine("1. Apply for a Job");
+                                        WriteLine("2. Dashboard");
+                                        WriteLine("3. Work");
+                                        WriteLine("4. Quit Job");
+                                        WriteLine("5. Exit");
+                                        Write("SELECTION: ");
+                                        input = Convert.ToInt32(ReadLine());
+                                    }
+                                    catch
+                                    {
+                                        WriteLine("You did not inserted a numeric input (0-9)!");
+                                        Thread.Sleep(3000);
+                                        Clear();
+                                    }
+                                    switch (input)
+                                    {
+                                        case 1:
+                                            Clear();
+                                            if (jobDetails.hasJob == false)
+                                            {
+                                                jobDetails.JobSelection(payDetails);
+                                            }
+                                            else
+                                            {
+                                                WriteLine("You are currently an employee! You cannot have more than ONE job!");
+                                                WriteLine("Press ANY key to continue");
+                                                ReadLine();
+                                            }
+                                            Clear();
+                                            break;
+                                        case 2:
+                                            Clear();
+                                            if (jobDetails.hasJob == true)
+                                            {
+                                                jobDetails.JobDashboard(payDetails, levelIndex, weeksLeft);
+                                            }
+                                            else
+                                            {
+                                                WriteLine("You don't have access to a dashboard since you are not an employer\nApply at any job before accessing this menu!");
+                                                WriteLine("Press ANY key to continue");
+                                                ReadLine();
+                                            }
+                                            Clear();
+                                            break;
+                                        case 3:
+                                            if (jobDetails.hasJob == true)
+                                            {
+                                                try
+                                                {
+                                                    Clear();
+                                                    WriteLine("");
+                                                    WriteLine("= TIME TO START YOUR SHIFT! =");
+                                                    WriteLine($"Weeks Worked: {weeksWorked}");
+                                                    if (levelIndex == 2)
+                                                    {
+                                                        WriteLine("You are currently a Senior at your position. So, there are not weeks left to level up!");
+                                                    }
+                                                    else
+                                                    {
+                                                        WriteLine($"Weeks Left for Next Level: {weeksLeft}");
+                                                    }
+                                                    WriteLine("");
+                                                    Write("How many hours would you like to work this week? (MIN 20 - MAX 40): ");
+
+                                                    input = Convert.ToInt32(ReadLine());
+                                                }
+                                                catch
+                                                {
+                                                    WriteLine("ERROR! You did not inserted a correct number (20-40)!");
+                                                }
+                                                while (input < 20 || input > 40)
+                                                {
+                                                    WriteLine("Ups! You are either working too much or doing less than 20 hours!");
+                                                    Write("TRY AGAIN! How many hours would you like to work this week? (MIN 20 - MAX 40): ");
+                                                    input = Convert.ToInt32(ReadLine());
+                                                }
+                                                Clear();
+                                                WriteLine("Working.....");
+
+                                                if (Profile.taxReducer == true)
+                                                {
+                                                    extraFees = 250;
+
+                                                    if (Profile.storeDiscount == true)
+                                                    {
+                                                        extraFees += 500;
+                                                    }
+                                                }
+
+                                                Thread.Sleep(input * 100);
+                                                payDetails = new(input, levelIndex, extraFees);
+                                                jobDetails.UpdateProperties(payDetails);
+                                                randomID = random.Next(100, 999);
+                                                bankAccount.AddJob(payDetails, randomID, "Work Pay");
+                                                weeksWorked++;
+                                                weeksLeft--;
+                                                Clear();
+
+                                                if (weeksLeft == 0)
+                                                {
+                                                    if (levelIndex == 2)
+                                                    {
+                                                        WriteLine("Another 10 great weeks as a senior with us! Thank you!");
+                                                    }
+                                                    else
+                                                    {
+                                                        levelIndex++;
+                                                        WriteLine($"CONGRATULATIONS! You were promoted to {payDetails.JobLevel[levelIndex]}!");
+                                                        WriteLine("Your pay rate was increased and if applicable, an unique benefit was added for your role!");
+                                                        WriteLine("Thank you for your time with us!");
+                                                        WriteLine($"NOTE: Changes will be applied on next paycheck!");
+                                                        WriteLine("");
+                                                        weeksLeft = 10;
+                                                    }
+                                                }
+                                                WriteLine("Keep up the hard work and you will be promoted!");
+                                                WriteLine("");
+                                                payDetails.DisplayPaycheck();
+                                                WriteLine(bankAccount.DisplayBalance());
+                                                input = 0; //resets value
+                                                WriteLine("");
+                                                WriteLine("Press ANY key to go back to menu");
+                                                ReadKey();
+                                                Clear();
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                Clear();
+                                                WriteLine("You can't work if you dont have a job!");
+                                                Thread.Sleep(2000);
+                                                Clear();
+                                                break;
+                                            }
+                                        case 4:
+                                            if (jobDetails.hasJob == true)
+                                            {
+                                                jobDetails.ResignJob(payDetails);
+                                                if (jobDetails.hasResign == true)
+                                                {
+                                                    weeksWorked = 0;
+                                                    weeksLeft = 10;
+                                                    levelIndex = 0;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Clear();
+                                                WriteLine("You cannot do this because you don't have a job!");
+                                            }
+                                            break;
+                                        case 5:
+                                            breakFlag = false; //NEW! Escape a While(true) using a boolean!
+                                            Clear();
+                                            break;
                                     }
                                 }
-                                Thread.Sleep(input * 100);
-                                jobDetails = new Job(payRate, input, extraFees);
-                                randomID = random.Next(100, 999);
-                                bankAccount.AddJob(jobDetails, randomID, "Work Pay");
-                                weeksWorked++;
-                                Clear();
-
-                                if (weeksWorked % 5 == 0)
-                                {
-                                    WriteLine($"CONGRATULATIONS! You were given a raise of +${payRaise} for your hourly payrate");
-                                    payRate += payRaise;
-                                    WriteLine($"New Rate Available On Next Paycheck: ${payRate}/h");
-                                    WriteLine("");
-                                }
-                                WriteLine("You worked really hard this week!");
-                                WriteLine("Keep working hard and you will get a raise!");
-                                WriteLine("");
-                                jobDetails.DisplayPaycheck();
-                                WriteLine(bankAccount.DisplayBalance());
-                                WriteLine("");
-                                WriteLine("Press ANY key to go back to menu");
-                                ReadKey();
-                                Clear();
                                 break;
                             case 3:
                                 Clear();
@@ -450,7 +559,7 @@ class Program
                                 }
                                 else
                                 {
-                                    ItemShop.PurchasingProduct(bankAccount, randomID, "Purchase");
+                                    ItemShop.PurchasingProduct(Profile, bankAccount, randomID, "Purchase");
                                     break;
                                 }
                             case 6:

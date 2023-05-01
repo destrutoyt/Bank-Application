@@ -12,11 +12,9 @@ namespace Bank_Application
         public string[] shopProducts = { "- PS5 Bundle ($799)", "- High-End PC ($2999)", "- Luxury Clothes ($6999)", "- Used 2010 Nissan Sentra ($10000)", "- 2023 Nissan GTR ($50000)" };
         public int[] itemPrice = { 799, 2999, 6999, 10000, 50000 };
         double TAXRATE = 0.0575; //Can be changed
-        decimal subTotal = 0, taxAmount = 0, totalPrice = 0, discount = 0;
+        decimal subTotal, taxAmount, totalPrice, discount;
         public bool payVerification = false; //Verify if balance is enough to cover payment
         int itemIndex;
-
-
 
         public ShopItem(int itemIndex)
         {
@@ -31,6 +29,37 @@ namespace Bank_Application
             }
         }
         public bool VerifyPayment(BankAccount bankData, Account upgrades)
+        {
+            if (upgrades.taxReducer == true)
+            {
+                
+                TAXRATE -= 0.0225;
+                subTotal = itemPrice[itemIndex];
+                taxAmount = (decimal)(itemPrice[itemIndex] * TAXRATE); // Ex. A * 5.75 ----> A would be number from the array itemPrice depending on the index inputed.
+                if (upgrades.storeDiscount == true)
+                {
+                    discount = subTotal / 25;
+                    totalPrice = subTotal + taxAmount;
+                }
+            }
+            else
+            {
+                subTotal = itemPrice[itemIndex];
+                taxAmount = (decimal)(itemPrice[itemIndex] * TAXRATE); // Ex. A * 5.75 ----> A would be number from the array itemPrice depending on the index inputed.
+            }
+
+            totalPrice = subTotal + taxAmount - discount;
+
+            if (bankData.Balance < totalPrice)
+            {
+                return payVerification = false;
+            }
+            else
+            {
+                return payVerification=true;
+            }
+        }
+        public void PurchasingProduct(Account upgrades, BankAccount bankData, int transactionID, string transactionType)
         {
             if (upgrades.taxReducer == true)
             {
@@ -53,19 +82,9 @@ namespace Bank_Application
                 subTotal = itemPrice[itemIndex];
                 taxAmount = (decimal)(itemPrice[itemIndex] * TAXRATE); // Ex. A * 5.75 ----> A would be number from the array itemPrice depending on the index inputed.
             }
+
             totalPrice = subTotal + taxAmount - discount;
 
-            if (bankData.Balance < totalPrice)
-            {
-                return payVerification = false;
-            }
-            else
-            {
-                return payVerification=true;
-            }
-        }
-        public void PurchasingProduct(BankAccount bankData, int transactionID, string transactionType)
-        {
             WriteLine("");
             WriteLine($"You are purchasing the following product: ");
             WriteLine(shopProducts[itemIndex]);

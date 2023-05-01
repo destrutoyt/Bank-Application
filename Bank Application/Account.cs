@@ -19,7 +19,7 @@ namespace Bank_Application
         string password = "";
         string name = "";
         public bool taxReducer = false;
-        public bool storeDiscount = false;
+        public bool storeDiscount = true;
         private int account_number = 0;
 
         public Account(string user, string password, string name, int account_number) //CONSTRUCTOR
@@ -45,7 +45,7 @@ namespace Bank_Application
             {
                 WriteLine("Starting upgrade transaction....");
 
-                bankData.Balance -= 250;
+                bankData.Balance -= 500;
                 bankData.transactionAmount.Add(price);
                 bankData.transactionType.Add(transactionType);
                 storeDiscount = true;

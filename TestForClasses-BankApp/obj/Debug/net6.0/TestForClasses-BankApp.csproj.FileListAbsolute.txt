@@ -13,3 +13,18 @@ C:\Users\Miguel Garces\Desktop\C# Projects\Bank Application\TestForClasses-BankA
 C:\Users\Miguel Garces\Desktop\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.pdb
 C:\Users\Miguel Garces\Desktop\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.genruntimeconfig.cache
 C:\Users\Miguel Garces\Desktop\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\ref\TestForClasses-BankApp.dll
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\bin\Debug\net6.0\TestForClasses-BankApp.exe
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\bin\Debug\net6.0\TestForClasses-BankApp.deps.json
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\bin\Debug\net6.0\TestForClasses-BankApp.runtimeconfig.json
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\bin\Debug\net6.0\TestForClasses-BankApp.dll
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\bin\Debug\net6.0\TestForClasses-BankApp.pdb
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.csproj.AssemblyReference.cache
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.AssemblyInfoInputs.cache
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.AssemblyInfo.cs
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.csproj.CoreCompileInputs.cache
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.dll
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\refint\TestForClasses-BankApp.dll
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.pdb
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\TestForClasses-BankApp.genruntimeconfig.cache
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\TestForClasses-BankApp\obj\Debug\net6.0\ref\TestForClasses-BankApp.dll

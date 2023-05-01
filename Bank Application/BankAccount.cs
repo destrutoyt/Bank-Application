@@ -21,11 +21,11 @@ namespace Bank_Application
         {
             return $"New Balance: {Balance:C}";
         }
-        public void AddJob(Job jobData, int transactionID, string transactionInfo)
+        public void AddJob(PayChecks jobData, int transactionID, string transactionInfo)
         {
             jobData.DisplayPaycheck(); //CALCULATE TOTAL PAYMENT
-            Balance += jobData.PayTotal;
-            transactionAmount.Add(jobData.PayTotal);
+            Balance += jobData.NetPay;
+            transactionAmount.Add(jobData.NetPay);
             transactionId.Add(transactionID);
             transactionType.Add(transactionInfo);
         }
