@@ -30,10 +30,10 @@ class Program
         bool breakFlag = true;
 
         //OBJECTS
-        var bankAccount = new BankAccount(50m); //START WITH $50 BALANCE BY CREATING NEW ACCOUNT
+        var bankAccount = new BankAccount(5000m); //START WITH $50 BALANCE BY CREATING NEW ACCOUNT
         var payDetails = new PayChecks(0, 0, 0);
         var jobDetails = new Jobs();
-        Account? Profile = null;  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
+        Account Profile = new("test", "test", "test", 0);  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
         CreateFile BankStatement = new CreateFile();
         ShopItem ItemShop = new ShopItem(0);
 
@@ -202,7 +202,7 @@ class Program
                                             WriteLine("UPGRADES AVAILABLE");
                                             if (Profile.taxReducer == false)
                                             {
-                                                WriteLine("Tax Reducer ($250) > Reduces the sales tax by 2.25% for all purchases");
+                                                WriteLine("Tax Reducer ($300) > Reduces the sales tax by 2% for all purchases");
                                             }
                                             if (Profile.storeDiscount == false)
                                             {

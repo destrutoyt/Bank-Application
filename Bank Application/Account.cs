@@ -19,7 +19,7 @@ namespace Bank_Application
         string password = "";
         string name = "";
         public bool taxReducer = false;
-        public bool storeDiscount = true;
+        public bool storeDiscount = false;
         private int account_number = 0;
 
         public Account(string user, string password, string name, int account_number) //CONSTRUCTOR
@@ -61,14 +61,14 @@ namespace Bank_Application
             {
                 WriteLine("Starting upgrade transaction....");
 
-                bankData.Balance -= 250;
+                bankData.Balance -= 300;
                 bankData.transactionAmount.Add(price);
                 bankData.transactionType.Add(transactionType);
                 taxReducer = true;
                 Thread.Sleep(3000);
                 Clear();
                 WriteLine("CONGRATULATIONS ON YOUR NEW UPGRADE!");
-                WriteLine("You can now get 2.25% off your sales tax for all purchases!");
+                WriteLine("You can now get 2% off your sales tax for all purchases!");
                 WriteLine("Press ANY key to continue");
                 ReadKey();
                 Clear();
@@ -91,13 +91,17 @@ namespace Bank_Application
                 {
                     WriteLine("Tax Reducer = ACTIVATED");
                 }
-                if (storeDiscount == true)
-                {
-                    WriteLine("Store Discount = ACTIVATED");
-                }   
                 else
                 {
-                    WriteLine("none");
+                    WriteLine("Tax Reducer = NOT ACTIVATED");
+                    if (storeDiscount == true)
+                    {
+                        WriteLine("Store Discount = ACTIVATED");
+                    }
+                    else
+                    {
+                        WriteLine("Store Discount = NOT ACTIVATED");
+                    }
                 }
                 WriteLine("= = = = = = = = = = = = =");
             }
@@ -115,13 +119,17 @@ namespace Bank_Application
                 {
                     WriteLine("Tax Reducer = ACTIVATED");
                 }
-                if (storeDiscount == true)
-                {
-                    WriteLine("Store Discount = ACTIVATED");
-                }
                 else
                 {
-                    WriteLine("none");
+                    WriteLine("Tax Reducer = NOT ACTIVATED");
+                    if (storeDiscount == true)
+                    {
+                        WriteLine("Store Discount = ACTIVATED");
+                    }
+                    else
+                    {
+                        WriteLine("Store Discount = NOT ACTIVATED");
+                    }
                 }
                 WriteLine("= = = = = = = = = = = = =");
             }

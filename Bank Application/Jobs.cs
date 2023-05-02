@@ -16,7 +16,7 @@ namespace Bank_Application
 
         string jobName;
         public decimal setPayRate, setPayRaise, setBonus;
-        double setReducedTax;
+        decimal setReducedTax;
         public void JobSelection(PayChecks addPayData)
         {
             inputnum = 3;
@@ -54,7 +54,7 @@ namespace Bank_Application
                     setPayRate = 25;
                     setBonus = 100;
                     setPayRaise = 45;
-                    setReducedTax = 0.0025;
+                    setReducedTax = 0.025m;
                     jobName = "Software Engineer";
                     WriteLine("YOU ARE NOW WORKING AS A SOFTWARE ENGINEER!");
                     WriteLine("Press ANY key to continue");
@@ -81,7 +81,7 @@ namespace Bank_Application
                     setPayRate = 15;
                     setBonus = 150;
                     setPayRaise = 30;
-                    setReducedTax = 0.0025;
+                    setReducedTax = 0.025m;
                     jobName = "Graphic Designer";
                     hasJob = true;
                     WriteLine("YOU ARE NOW WORKING AS A GRAPHIC DESIGNER");
@@ -108,7 +108,7 @@ namespace Bank_Application
                     setPayRate = 30;
                     setBonus = 50;
                     setPayRaise = 35;
-                    setReducedTax = 0.010;
+                    setReducedTax = 0.010m;
                     jobName = "Lawyer";
                     hasJob = true;
                     WriteLine("YOU ARE NOW WORKING AS A LAWYER!");
@@ -225,7 +225,7 @@ namespace Bank_Application
         void LawyerDetails()
         {
             Clear();
-            WriteLine("= INFORMATION ABOUT LAWYER =\n" + "Your starting pay rate will be $30/h\n" + "Juniors will get a raise of $5 in their pay rate and federal taxes will be reduced to 0.01%\n"
+            WriteLine("= INFORMATION ABOUT LAWYER =\n" + "Your starting pay rate will be $30/h\n" + "Juniors will get a raise of $5 in their pay rate and federal taxes will be reduced to 1%\n"
                 + "Seniors will benefit from $50 bonus EACH paycheck (Bonus will not be subject to tax deduction)");
         }
 

@@ -14,7 +14,7 @@ namespace Bank_Application
         int hours;
         decimal bonus;
         decimal grossPay;
-        double federalTax = 0.025; //Can be changed
+        decimal federalTax = 0.025m; //Can be changed
         decimal taxAmount;
 
         public PayChecks(int hours, int jobLevel, decimal upgradeFees)
@@ -54,14 +54,15 @@ namespace Bank_Application
             WriteLine("");
             WriteLine("= OTHER FEES =");
             WriteLine($"Upgrade Fees: {UpgradeFees:C}");
-            WriteLine($"Federal Tax ({federalTax}%): {taxAmount}");
+            WriteLine($"Federal Tax ({federalTax.ToString("P2")}): {taxAmount}");
             WriteLine("");
+            WriteLine("= TAKE HOME =");
             WriteLine($"Net Pay: {NetPay:C}");
         }
         public decimal PayRate { get; set; }
         public decimal PayRaise { get; set; }
         public decimal Bonus { get; set; }
-        public double ReducedTax { get; set; }
+        public decimal ReducedTax { get; set; }
         public string JobName = "test";
         public string[] JobLevel = { "Associate", "Junior", "Senior" };
         private decimal UpgradeFees { get; set; }
