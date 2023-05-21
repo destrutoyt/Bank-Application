@@ -7,7 +7,7 @@ class Program
 {
     static public void Main(String[] args)
     {
-        // OFFICIAL RELEASE by Miguel Angel Garces Lenis (ReWorked Version 3.0)
+        // OFFICIAL RELEASE by Miguel Angel Garces Lenis (ReWorked Version 4.0-FINAL)
 
         //REGISTRATION / LOGIN
         string user = "test", pass = "test", firstName = "test", loginUser, loginPass;
@@ -31,13 +31,12 @@ class Program
 
         //OBJECTS
         var bankAccount = new BankAccount(5000m); //START WITH $50 BALANCE BY CREATING NEW ACCOUNT
-        var payDetails = new PayChecks(0, 0, 0);
+        var payDetails = new PaySystem(0, 0, 0);
         var jobDetails = new Jobs();
-        Account Profile = new("test", "test", "test", 0);  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
+        UserAccount Profile = new("test", "test", "test", 0);  //initiate a null object QUESTION MARK IS REQUIRED FOR NULLABLE TYPES
         CreateFile BankStatement = new CreateFile();
         ShopItem ItemShop = new ShopItem(0);
 
-    StartOfProgram:
         while (true) //GOES BACK TO MENU IF TRUE
         {
             try
@@ -48,8 +47,7 @@ class Program
                 WriteLine("== MENU ==");
                 WriteLine("1. Registration");
                 WriteLine("2. Log In");
-                WriteLine("3. Admin Access");
-                WriteLine("4. Exit");
+                WriteLine("3. Exit");
                 Write("Enter your option (ONLY NUMBERS ALLOWED): ");
                 selection = Convert.ToInt16(ReadLine());
             }
@@ -88,7 +86,7 @@ class Program
                     Write("First Name: ");
                     firstName = Convert.ToString(ReadLine());
 
-                    while (firstName == user || firstName.Length > 100 || !Regex.IsMatch(firstName, "^[a-zA-Z\\s]*$"))
+                    while (string.IsNullOrWhiteSpace(firstName) || firstName == user || firstName.Length > 30 || !Regex.IsMatch(firstName, "^[a-zA-Z\\s]*$"))
                     {
                         WriteLine("ERROR! You inserted an invalid name");
                         Write("First Name: ");
@@ -98,7 +96,7 @@ class Program
                     Clear();
                     WriteLine("Saving..");
                     Thread.Sleep(1000); //DELAY 1 SECOND
-                    Profile = new Account(user, pass, firstName, accountNumber); //creates a new object
+                    Profile = new UserAccount(user, pass, firstName, accountNumber); //creates a new object
                     WriteLine("Creating Account..");
                     Thread.Sleep(1000); //DELAY 1 SECOND
 
@@ -141,7 +139,7 @@ class Program
                         WriteLine("\n");
                     }
                     Clear();
-                    while (true)
+                    while (breakFlag==true)
                     {
                         breakFlag = true;
                         WriteLine(" = Welcome Back {0}! = ", firstName);
@@ -232,7 +230,7 @@ class Program
                                                 }
                                                 else
                                                 {
-                                                    Profile.ProfileUpgrades(bankAccount, 500, "STORE", "Upgrade (No-ID)");
+                                                    Profile.PremiumPerks(bankAccount, 500, "STORE", "Premium Perk (No-ID)");
                                                     break;
                                                 }
                                             }
@@ -248,7 +246,7 @@ class Program
                                                 }
                                                 else
                                                 {
-                                                    Profile.ProfileUpgrades(bankAccount, 250, "TAX", "Upgrade (No-ID)");
+                                                    Profile.PremiumPerks(bankAccount, 250, "TAX", "Premium Perk (No-ID)");
                                                     break;
                                                 }
                                             }
@@ -564,22 +562,24 @@ class Program
                                 }
                             case 6:
                                 Clear();
-                                if (bankAccount.transactionId.Count < 1)
+                                if (bankAccount.TransactionID.Count < 1)
                                 {
                                     WriteLine();
                                     BankStatement.ErrorMessageStatement();
                                     Thread.Sleep(5000);
+                                    Clear();
                                     break;
                                 }
                                 else
                                 {
-                                    BankStatement.CreateStatement(bankAccount, Profile, DateTime.Now);
+                                    BankStatement.CreateStatement(bankAccount, Profile, DateOnly.FromDateTime(DateTime.Now));
                                     break;
 
                                 }
                             case 7: //WILL WORK ON CONFIRMATION FEATURE SOON
                                 Clear();
-                                goto StartOfProgram; // (Must be removed)
+                                breakFlag = false;
+                                break; // (Must be removed)
 
                             default:
                                 {
@@ -589,10 +589,8 @@ class Program
                                 }
                         }
                     }
-                case 3:
-                    WriteLine("ADMIN CONTROL COMING SOON");
                     break;
-                case 4:
+                case 3:
                     WriteLine("Exiting app...");
                     Thread.Sleep(2500);
                     Clear();

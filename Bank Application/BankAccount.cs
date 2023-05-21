@@ -9,9 +9,9 @@ namespace Bank_Application
 {
     public class BankAccount
     {
-        public List<decimal> transactionAmount = new List<decimal>();
-        public List<int> transactionId = new List<int>();
-        public List<string> transactionType = new List<string>();
+        public List<decimal> TransactionAmount = new List<decimal>();
+        public List<int> TransactionID = new List<int>();
+        public List<string> TransactionName = new List<string>();
 
         public BankAccount(decimal initialBalance)
         {
@@ -21,15 +21,15 @@ namespace Bank_Application
         {
             return $"New Balance: {Balance:C}";
         }
-        public void AddJob(PayChecks jobData, int transactionID, string transactionInfo)
+        public void AddJob(PaySystem jobData, int transactionID, string transactionInfo)
         {
             jobData.DisplayPaycheck(); //CALCULATE TOTAL PAYMENT
             Balance += jobData.NetPay;
-            transactionAmount.Add(jobData.NetPay);
-            transactionId.Add(transactionID);
-            transactionType.Add(transactionInfo);
+            TransactionAmount.Add(jobData.NetPay);
+            TransactionID.Add(transactionID);
+            TransactionName.Add(transactionInfo);
         }
-        public void Deposit(decimal deposit, int transactionID, string transactionInfo)
+        public void Deposit(decimal deposit, int ID, string transactionInfo)
         {
             WriteLine("Starting transaction...");
             Thread.Sleep(1000);
@@ -37,9 +37,9 @@ namespace Bank_Application
 
             Wallet -= deposit;
             Balance += deposit;
-            transactionAmount.Add(deposit);
-            transactionId.Add(transactionID);
-            transactionType.Add(transactionInfo);
+            TransactionAmount.Add(deposit);
+            TransactionID.Add(ID);
+            TransactionName.Add(transactionInfo);
 
             Thread.Sleep(1000);
             WriteLine("Transaction COMPLETED!");
@@ -51,7 +51,7 @@ namespace Bank_Application
             Clear();
 
         }
-        public void Withdrawl(decimal withdrawl, int transactionID, string transactionInfo)
+        public void Withdrawl(decimal withdrawl, int ID, string transactionInfo)
         {
             WriteLine("Starting transaction...");
             Thread.Sleep(1000);
@@ -59,9 +59,9 @@ namespace Bank_Application
 
             Wallet = withdrawl;
             Balance -= withdrawl;
-            transactionAmount.Add(withdrawl);
-            transactionId.Add(transactionID);
-            transactionType.Add(transactionInfo);
+            TransactionAmount.Add(withdrawl);
+            TransactionID.Add(ID);
+            TransactionName.Add(transactionInfo);
 
             Thread.Sleep(1500);
             WriteLine("Transaction COMPLETED!");
@@ -73,18 +73,20 @@ namespace Bank_Application
             Clear();
 
         }
-        public void OverWithdrawl(decimal withdrawl, int transactionID, string transactionInfo)
+        public void OverWithdrawl(decimal withdrawl, int ID, string transactionInfo)
         {
             WriteLine("Starting transaction...");
             Thread.Sleep(1000);
-            WriteLine("Withdrawing funds from your bank account...");
+            WriteLine("Withdrawing money from your bank account...");
+            Thread.Sleep(1000);
+            WriteLine("Applying $100 fee for OverWithdrawl");
+            WriteLine("");
 
-            withdrawl += 100;
             Wallet = withdrawl;
-            Balance -= withdrawl;
-            transactionAmount.Add(withdrawl);
-            transactionId.Add(transactionID);
-            transactionType.Add(transactionInfo);
+            Balance -= withdrawl + 100;
+            TransactionAmount.Add(withdrawl);
+            TransactionID.Add(ID);
+            TransactionName.Add(transactionInfo);
 
             Thread.Sleep(1500);
             WriteLine("Transaction COMPLETED!");

@@ -28,7 +28,7 @@ namespace Bank_Application
                 WriteLine(i);
             }
         }
-        public bool VerifyPayment(BankAccount bankData, Account upgrades)
+        public bool VerifyPayment(BankAccount bankData, UserAccount upgrades)
         {
             subTotal = itemPrice[itemIndex];
 
@@ -53,14 +53,14 @@ namespace Bank_Application
                 return payVerification=true;
             }
         }
-        public void PurchasingProduct(Account upgrades, BankAccount bankData, int transactionID, string transactionType)
+        public void PurchasingProduct(UserAccount upgrades, BankAccount bankData, int transactionID, string transactionType)
         {
             subTotal = itemPrice[itemIndex];
-            WriteLine("= Discounts =");
+            WriteLine("= DISCOUNTS =");
             if (upgrades.taxReducer == true)
             {
                 TAXRATE -= 0.02m;
-                WriteLine("Sales Tax Reduced By 3.5%");
+                WriteLine("-2% Sales Tax Discount Applied!");
             }
             else
             {
@@ -80,14 +80,14 @@ namespace Bank_Application
             totalPrice = subTotal + taxAmount - discount;
 
             WriteLine("");
-            WriteLine($"You are purchasing the following product: ");
+            WriteLine($"Item being purchased: ");
             WriteLine(shopProducts[itemIndex]);
             Thread.Sleep(2500);
             WriteLine("Wait while we process your transaction...");
 
-            bankData.transactionId.Add(transactionID);
-            bankData.transactionType.Add(transactionType);
-            bankData.transactionAmount.Add(totalPrice);
+            bankData.TransactionID.Add(transactionID);
+            bankData.TransactionName.Add(transactionType);
+            bankData.TransactionAmount.Add(totalPrice);
             bankData.Balance -= totalPrice;
             Thread.Sleep(2500);
             Clear();
@@ -98,7 +98,7 @@ namespace Bank_Application
             WriteLine(shopProducts[itemIndex]);
             WriteLine("");
             WriteLine($"Sub-Total: ${subTotal}");
-            WriteLine($"Discount: -${discount}");
+            WriteLine($"Discount (If applicable): -${discount}");
             WriteLine($"Sales Taxes ({TAXRATE.ToString("P2")}): ${taxAmount}");
             WriteLine($"Total: ${totalPrice}");
             WriteLine("");
@@ -111,7 +111,8 @@ namespace Bank_Application
         public void PaymentDenied()
         {
             WriteLine("Ups! Your payment was denied due to insufficient funds.");
-            WriteLine("Please, try again once you have enough funds to cover the transaction. TIP: Purchase an Account Upgrade to lower the total price");
+            WriteLine("Please, try again once you have enough funds to cover the transaction!");
+            WriteLine("Also, try and buy a premium perk to reduce the final price of the product!");
             WriteLine("Press ANY key to continue");
             ReadKey();
             Clear();

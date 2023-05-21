@@ -1,0 +1,15 @@
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\bin\Debug\net6.0\testing.exe
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\bin\Debug\net6.0\testing.deps.json
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\bin\Debug\net6.0\testing.runtimeconfig.json
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\bin\Debug\net6.0\testing.dll
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\bin\Debug\net6.0\testing.pdb
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\testing.csproj.AssemblyReference.cache
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\testing.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\testing.AssemblyInfoInputs.cache
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\testing.AssemblyInfo.cs
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\testing.csproj.CoreCompileInputs.cache
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\testing.dll
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\refint\testing.dll
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\testing.pdb
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\testing.genruntimeconfig.cache
+C:\Users\migue\OneDrive\Escritorio\C# Projects\Bank Application\testing\obj\Debug\net6.0\ref\testing.dll

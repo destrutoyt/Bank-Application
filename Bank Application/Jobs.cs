@@ -14,10 +14,10 @@ namespace Bank_Application
         int inputnum;
         string inputString;
 
-        string jobName;
+        public string jobName = "Unemployed";
         public decimal setPayRate, setPayRaise, setBonus;
         decimal setReducedTax;
-        public void JobSelection(PayChecks addPayData)
+        public void JobSelection(PaySystem addPayData)
         {
             inputnum = 3;
             WriteLine("Welcome to your place of work!");
@@ -127,7 +127,7 @@ namespace Bank_Application
                 return;
             }
         }
-        public void JobDashboard(PayChecks jobData, int jobLevel, int weeksLeft)
+        public void JobDashboard(PaySystem jobData, int jobLevel, int weeksLeft)
         {
             if (jobLevel == 2)
             {
@@ -167,7 +167,7 @@ namespace Bank_Application
             }
         }
 
-        public void UpdateProperties(PayChecks addPayData)
+        public void UpdateProperties(PaySystem addPayData)
         {
             addPayData.PayRate = setPayRate;
             addPayData.Bonus = setBonus;
@@ -175,7 +175,7 @@ namespace Bank_Application
             addPayData.ReducedTax = setReducedTax;
             addPayData.JobName = jobName;
         }
-        public void ResignJob(PayChecks jobData)
+        public void ResignJob(PaySystem jobData)
         {
             Clear();
             WriteLine("= ATTENTION =");
@@ -225,7 +225,7 @@ namespace Bank_Application
         void LawyerDetails()
         {
             Clear();
-            WriteLine("= INFORMATION ABOUT LAWYER =\n" + "Your starting pay rate will be $30/h\n" + "Juniors will get a raise of $5 in their pay rate and federal taxes will be reduced to 1%\n"
+            WriteLine("= INFORMATION ABOUT LAWYER =\n" + "Your starting pay rate will be $30/h\n" + "Juniors will get a raise of $10 in their pay rate and federal taxes will be reduced to 1%\n"
                 + "Seniors will benefit from $50 bonus EACH paycheck (Bonus will not be subject to tax deduction)");
         }
 
